@@ -1,0 +1,5 @@
+.*
+!/.gitignore
+
+/Pig.xcodeproj/xcuserdata
+/Pig.xcodeproj/project.xcworkspace/xcuserdata
