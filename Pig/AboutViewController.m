@@ -14,6 +14,9 @@
 
 @implementation AboutViewController
 
+@synthesize aboutWebView;
+
+
 @synthesize backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,6 +32,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self showNetworkPage];
 }
 
 - (void)viewDidUnload
@@ -41,6 +45,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)showNetworkPage
+{
+    NSURL *theURL = [NSURL URLWithString:@"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html"];
+    NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
+    [aboutWebView loadRequest:theRequest];
 }
 
 -(IBAction)backButtonPressed:(id)sender
