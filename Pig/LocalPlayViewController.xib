@@ -40,7 +40,7 @@
 					<object class="IBUILabel" id="268515357">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{121, 20}, {79, 21}}</string>
+						<string key="NSFrame">{{121, 10}, {79, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="52531663"/>
@@ -52,8 +52,11 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Local Play</string>
 						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<object class="NSColorSpace" key="NSCustomColorSpace">
+								<int key="NSID">2</int>
+							</object>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -161,24 +164,29 @@
 					<object class="IBUIImageView" id="52531663">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{38, 49}, {89, 89}}</string>
+						<string key="NSFrame">{{51, 49}, {89, 89}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="381769419"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage" id="48119736">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">pig_icon.png</string>
+						</object>
 					</object>
 					<object class="IBUIImageView" id="381769419">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{191, 49}, {89, 89}}</string>
+						<string key="NSFrame">{{180, 49}, {89, 89}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="580011850"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUIImage" ref="48119736"/>
 					</object>
 					<object class="IBUILabel" id="580011850">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -356,6 +364,22 @@
 					<int key="connectionID">30</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">player1NameLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="655546058"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">player2NameLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="377889219"/>
+					</object>
+					<int key="connectionID">32</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">exitButtonPressed:</string>
 						<reference key="source" ref="194377816"/>
@@ -395,16 +419,16 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="268515357"/>
 							<reference ref="194377816"/>
 							<reference ref="304937264"/>
 							<reference ref="922116699"/>
-							<reference ref="381769419"/>
-							<reference ref="52531663"/>
 							<reference ref="580011850"/>
 							<reference ref="655546058"/>
 							<reference ref="377889219"/>
 							<reference ref="658113668"/>
+							<reference ref="52531663"/>
+							<reference ref="381769419"/>
+							<reference ref="268515357"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -496,7 +520,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">30</int>
+			<int key="maxID">34</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -527,7 +551,9 @@
 						<string key="die2View">UIImageView</string>
 						<string key="exitButton">UIButton</string>
 						<string key="holdButton">UIButton</string>
+						<string key="player1NameLabel">UILabel</string>
 						<string key="player1ScoreLabel">UILabel</string>
+						<string key="player2NameLabel">UILabel</string>
 						<string key="player2ScoreLabel">UILabel</string>
 						<string key="rollButton">UIButton</string>
 						<string key="rollResultLabel">UILabel</string>
@@ -550,8 +576,16 @@
 							<string key="name">holdButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="player1NameLabel">
+							<string key="name">player1NameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="player1ScoreLabel">
 							<string key="name">player1ScoreLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="player2NameLabel">
+							<string key="name">player2NameLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="player2ScoreLabel">
@@ -588,6 +622,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="hold.png">{128, 128}</string>
+			<string key="pig_icon.png">{136, 128}</string>
 			<string key="roll.png">{128, 128}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>

@@ -21,8 +21,10 @@ static NSString *P2Key = @"player2Name";
 
 @implementation NamesViewController
 
+
 @synthesize P1NameField;
 @synthesize P2NameField;
+@synthesize messageLabel;
 
 @synthesize acceptButton;
 
@@ -42,6 +44,7 @@ static NSString *P2Key = @"player2Name";
     // Do any additional setup after loading the view from its nib.
     [self readNames]; //get names from file
     [self setNames];
+    [self resetMessage];
 }
 
 - (void)viewDidUnload
@@ -57,13 +60,46 @@ static NSString *P2Key = @"player2Name";
 }
 
 
-
+-(void)resetMessage
+{
+    messageLabel.text = @"Please enter player names";
+}
 
 -(IBAction)acceptButtonPressed:(id)sender
 {
-    
-    [self writeNames];
-    [self exitToMenu];
+    if ([self validateNames])
+    {
+        [self getNames];
+        [self writeNames];
+        [self resetMessage];
+        [self exitToMenu];
+    }
+    else 
+    {
+        messageLabel.text = @"Names cannot be the same!";
+    }
+}
+
+-(BOOL)validateNames
+{
+    [self getNames];
+    if ([P1Name isEqualToString:P2Name])
+    {
+        return false;
+    }
+    return true;
+}
+
+-(void)setNames
+{
+    P1NameField.text = P1Name;
+    P2NameField.text = P2Name;
+}
+
+-(void)getNames
+{
+    P1Name = P1NameField.text;
+    P2Name = P2NameField.text;
 }
 
 -(void)readNames
@@ -86,18 +122,8 @@ static NSString *P2Key = @"player2Name";
     
 }
 
--(void)setNames
-{
-    P1NameField.text = P1Name;
-    P2NameField.text = P2Name;
-}
-
 -(void)writeNames
-{
-    //get values from name fields
-    P1Name = P1NameField.text;
-    P2Name = P2NameField.text;
-    
+{   
     //write names to file
     [[NSUserDefaults standardUserDefaults] setObject:P1Name forKey:P1Key];
     [[NSUserDefaults standardUserDefaults] setObject:P2Name forKey:P2Key];

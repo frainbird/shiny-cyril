@@ -13,6 +13,7 @@
 {
     IBOutlet UITextField *P1NameField;
     IBOutlet UITextField *P2NameField;
+    IBOutlet UILabel *messageLabel;
     
     UIButton *acceptButton;
 
@@ -22,6 +23,7 @@
 
 @property UITextField *P1NameField;
 @property UITextField *P2NameField;
+@property UILabel *messageLabel;
 
 @property UIButton    *acceptButton;
 

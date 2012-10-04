@@ -30,6 +30,7 @@
     IBOutlet UIButton       *localPlayButton;
     IBOutlet UIButton       *namesButton;
     IBOutlet UIButton       *networkPlayButton;
+    IBOutlet UILabel        *namesMessageLabel;
 }
 
 
@@ -38,6 +39,7 @@
 @property (nonatomic,retain) UIButton *localPlayButton;
 @property (nonatomic,retain) UIButton *namesButton;
 @property (nonatomic,retain) UIButton *networkPlayButton;
+@property (nonatomic,retain) UILabel  *namesMessageLabel;  
 
 
 -(IBAction)localPlayPressed:(id)sender;

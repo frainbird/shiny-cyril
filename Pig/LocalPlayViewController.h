@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NamesViewController.h"
 
 @interface LocalPlayViewController : UIViewController
 {
@@ -19,7 +20,10 @@
     IBOutlet UILabel *roundScoreLabel;
     IBOutlet UILabel *player1ScoreLabel;
     IBOutlet UILabel *player2ScoreLabel;
+    IBOutlet UILabel *player1NameLabel;
+    IBOutlet UILabel *player2NameLabel;
     
+        
 }
 
 @property UIButton *exitButton;
@@ -31,6 +35,8 @@
 @property UILabel  *roundScoreLabel;
 @property UILabel *player1ScoreLabel;
 @property UILabel *player2ScoreLabel;
+@property UILabel *player1NameLabel;
+@property UILabel *player2NameLabel;
 
 -(void)playGame;
 

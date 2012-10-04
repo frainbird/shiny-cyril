@@ -12,6 +12,13 @@
 
 @end
 
+//local variables
+NSString* Player1Name = @"";
+NSString* Player2Name = @"";
+
+static NSString *P1Key = @"player1Name";
+static NSString *P2Key = @"player2Name";
+
 int currentPlayer; //may be better to implement as int
 int die1; //value of die face
 int die2; //value of die face
@@ -22,7 +29,7 @@ static int PLAYER1 = 1;
 static int PLAYER2 = 2;
 static int WINNING_SCORE = 100;
 int ones; //how many dice with face "1" were rolled (values 0, 1, 2)
-NSString *rollResultMessage[3]={@"You score:", @"A one! Score nothing", @"Two ones! Lose all points"};
+NSString *rollResultMessage[3]={@"Roll score:", @"A one! Score nothing", @"Two ones! Lose all points"};
 BOOL rollAgain;
 
 @implementation LocalPlayViewController
@@ -37,6 +44,8 @@ BOOL rollAgain;
 @synthesize roundScoreLabel;
 @synthesize player1ScoreLabel;
 @synthesize player2ScoreLabel;
+@synthesize player1NameLabel;
+@synthesize player2NameLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,9 +87,29 @@ BOOL rollAgain;
 {
     NSLog(@"getStartingPlayer started");
     //check for both player names
-    //if invalid names, get player names
+    [self readNames];
+    [self chooseStartingPlayer];
+
+}
+
+
+-(void)readNames
+{
+    NSLog(@"readNames started");
+    //read in names
+    
+    Player1Name = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
+    Player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+}
+
+-(void)chooseStartingPlayer
+{
+    NSLog(@"chooseStartingPlayer started");
+    //popup a view to choose who is starting
+    //players can choose either player, or flip a coin to determine    
     
 }
+
 
 - (void)resetGame
 {
@@ -91,13 +120,15 @@ BOOL rollAgain;
     player2Total = 0; //start at 0
     die1 = 0;
     die2 = 0;
-    rollResultLabel.text=@"Player1 to go first";
-    [self showScoreLabels];
 }
 
 -(void)loadGameElements
 {
     NSLog(@"loadGameElements started");
+    rollResultLabel.text=[NSString stringWithFormat:@"%@ to go first", Player1Name];
+    [self showScoreLabels];
+    [self showPlayerNames];
+    [self highlightCurrentPlayer:currentPlayer];
 }
 
 -(IBAction)rollButtonPressed:(id)sender
@@ -131,6 +162,12 @@ BOOL rollAgain;
     die2 = arc4random() % 6 + 1;
     NSLog(@"RD: Die1 is a %d", die1);
     NSLog(@"RD: Die2 is a %d", die2);
+}
+
+-(void)showPlayerNames
+{
+    player1NameLabel.text = Player1Name;
+    player2NameLabel.text = Player2Name;
 }
 
 -(void)showDice
@@ -254,8 +291,8 @@ BOOL rollAgain;
     //    rollResultLabel.text = [NSString stringWithFormat:@"Player %d to roll", currentPlayer];
    // }
     roundScoreLabel.text = [NSString stringWithFormat:@"Round: %d", roundScore];
-    player1ScoreLabel.text = [NSString stringWithFormat:@"Player1: %d", player1Total];
-    player2ScoreLabel.text = [NSString stringWithFormat:@"Player2: %d", player2Total];
+    player1ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player1Name, player1Total];
+    player2ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player2Name, player2Total];
 }
 
 -(void)evaluateRound
@@ -278,6 +315,15 @@ BOOL rollAgain;
 -(void)showWinnerMessage:(int)winningPlayer
 {
     NSLog(@"Player %d wins", winningPlayer);
+    if (winningPlayer == PLAYER1)
+    {
+        NSLog(@"%@ wins!", Player1Name);
+    }
+    if (winningPlayer == PLAYER2) 
+    {
+        NSLog(@"%@ wins!", Player2Name);
+    }
+    
     NSLog(@"Please press exit");
 }
 
@@ -317,6 +363,23 @@ BOOL rollAgain;
         currentPlayer = PLAYER1;
     }
     NSLog(@"CP: currentplayer is now %d", currentPlayer);
+    [self highlightCurrentPlayer:currentPlayer];
+}
+
+-(void)highlightCurrentPlayer:(int)player
+{
+    NSLog(@"highlightCurrentPlayer started");
+    if (currentPlayer == PLAYER1)
+    {
+        player1NameLabel.textColor = [UIColor redColor];
+        player2NameLabel.textColor = [UIColor whiteColor];
+    }
+    
+    if (currentPlayer == PLAYER2)
+    {
+        player1NameLabel.textColor = [UIColor whiteColor];
+        player2NameLabel.textColor = [UIColor redColor];
+    }
 }
 
 -(void)playSound

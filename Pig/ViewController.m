@@ -17,7 +17,8 @@ static int NETWORK_VC = 2;
 static int NAMES_VC = 3;
 static int ABOUT_VC = 4;
 
-
+static NSString *P1Key = @"player1Name";
+static NSString *P2Key = @"player2Name";
 
 @implementation ViewController
 
@@ -25,11 +26,13 @@ static int ABOUT_VC = 4;
 @synthesize networkPlayButton;
 @synthesize aboutButton;
 @synthesize namesButton;
+@synthesize namesMessageLabel;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    namesMessageLabel.text = @"";
 }
 
 - (void)viewDidUnload
@@ -47,8 +50,21 @@ static int ABOUT_VC = 4;
 {
     NSLog(@"Local play pressed");
     
-    [self pushView:localPlayVC :LOCAL_VC]; 
-    //[localPlayVC playGame]; //this is done in localPlayVC's viewDidLoad
+    //check names
+    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
+    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+    
+    //if neither name is blank
+    if ([name1 length] != 0 && [name2 length] != 0)
+    {
+        namesMessageLabel.text = @"";
+        [self pushView:localPlayVC :LOCAL_VC];
+    }
+    
+    else 
+    {
+        namesMessageLabel.text = @"Need both player names!";
+    }
 }
 
 - (IBAction)networkPlayPressed:(id)sender
@@ -56,7 +72,6 @@ static int ABOUT_VC = 4;
     NSLog(@"Network play pressed");  
     
     [self pushView:networkPlayVC :NETWORK_VC];
-    //playGame is called in localPlayVC's viewDidLoad
 }
 
 - (IBAction)namesPressed:(id)sender
