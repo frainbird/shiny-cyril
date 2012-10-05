@@ -10,6 +10,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
 
+#import "Reachability.h"
 #import "AboutViewController.h"
 #import "LocalPlayViewController.h"
 #import "NamesViewController.h"
@@ -24,8 +25,8 @@
     NamesViewController     *namesVC;
     NetworkPlayViewController *networkPlayVC;
     
-
-    
+    Reachability* internetReachable;
+        
     IBOutlet UIButton       *aboutButton;
     IBOutlet UIButton       *localPlayButton;
     IBOutlet UIButton       *namesButton;

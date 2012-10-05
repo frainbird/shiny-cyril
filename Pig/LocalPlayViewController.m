@@ -16,6 +16,11 @@
 NSString* Player1Name = @"";
 NSString* Player2Name = @"";
 
+NSURL *rollSoundURL;
+SystemSoundID rollSoundID;
+NSURL *loudPigSoundURL;
+SystemSoundID loudPigSoundID;
+
 static NSString *P1Key = @"player1Name";
 static NSString *P2Key = @"player2Name";
 
@@ -32,6 +37,8 @@ int ones; //how many dice with face "1" were rolled (values 0, 1, 2)
 NSString *rollResultMessage[3]={@"Roll score:", @"A one! Score nothing", @"Two ones! Lose all points"};
 BOOL rollAgain;
 
+
+                                              
 @implementation LocalPlayViewController
 
 @synthesize rollButton;
@@ -81,6 +88,19 @@ BOOL rollAgain;
     [self getStartingPlayer];
     [self resetGame];
     [self loadGameElements];
+    [self initialiseSounds];
+}
+
+-(void)initialiseSounds
+{
+    rollSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                             pathForResource:@"rollSound" 
+                             ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) rollSoundURL, &rollSoundID);    
+    loudPigSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                           pathForResource:@"pigSound" 
+                                           ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) loudPigSoundURL, &loudPigSoundID);  
 }
 
 - (void)getStartingPlayer
@@ -134,12 +154,14 @@ BOOL rollAgain;
 -(IBAction)rollButtonPressed:(id)sender
 {
     NSLog(@"roll button pressed");
+    AudioServicesPlaySystemSound(rollSoundID);
     [self rollDice];
     [self showDice];
     [self evaluateDice];
     [self calculateScore:true];
     [self showRollResult];
     [self showScoreLabels];
+    [self playResultSound];
     if (!rollAgain)
     {
         [self changePlayers];
@@ -382,11 +404,14 @@ BOOL rollAgain;
     }
 }
 
--(void)playSound
+-(void)playResultSound
 {
-    
+    NSLog(@"playResultSound, ones is: %d",ones);
+    if (ones == 2)
+    {
+        AudioServicesPlaySystemSound(loudPigSoundID);
+    }
 }
-
 
 -(IBAction)exitButtonPressed:(id)sender
 {

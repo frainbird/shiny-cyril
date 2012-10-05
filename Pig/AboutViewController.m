@@ -12,11 +12,13 @@
 
 @end
 
+
+NSString *ExternalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
+
 @implementation AboutViewController
 
 @synthesize aboutWebView;
-
-
+@synthesize networkUP;
 @synthesize backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +51,17 @@
 
 - (void)showNetworkPage
 {
-    NSURL *theURL = [NSURL URLWithString:@"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html"];
+    NSURL *theURL;
+    if (networkUP)
+    {
+        theURL = [NSURL URLWithString:ExternalURL];
+    }
+    else 
+    {
+        theURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                pathForResource:@"index" ofType:@"html"]];
+    }
+    
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
     [aboutWebView loadRequest:theRequest];
 }

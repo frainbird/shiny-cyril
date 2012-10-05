@@ -18,6 +18,9 @@ NSString* P2Name = @"";
 static NSString *P1Key = @"player1Name";
 static NSString *P2Key = @"player2Name";
 
+static int VALID = 0;
+static int BOTH_SAME = 1;
+static int BOTH_BLANK = 2;
 
 @implementation NamesViewController
 
@@ -67,27 +70,38 @@ static NSString *P2Key = @"player2Name";
 
 -(IBAction)acceptButtonPressed:(id)sender
 {
-    if ([self validateNames])
+    int result = [self validateNames];
+    
+    if (result == VALID)
     {
         [self getNames];
         [self writeNames];
         [self resetMessage];
         [self exitToMenu];
     }
-    else 
+    else if (result == BOTH_SAME)
     {
-        messageLabel.text = @"Names cannot be the same!";
+        messageLabel.text = @"Names cannot be the same";
     }
+    else
+    {
+        messageLabel.text=@"Please enter a player name";
+    }
+    
 }
 
--(BOOL)validateNames
+-(int)validateNames
 {
     [self getNames];
     if ([P1Name isEqualToString:P2Name])
     {
-        return false;
+        if([P1Name isEqualToString:@""])
+        {
+            return BOTH_BLANK;
+        }
+        return BOTH_SAME;
     }
-    return true;
+    return VALID;
 }
 
 -(void)setNames

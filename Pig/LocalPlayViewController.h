@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "NamesViewController.h"
 
 @interface LocalPlayViewController : UIViewController

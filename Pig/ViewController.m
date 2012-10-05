@@ -20,6 +20,10 @@ static int ABOUT_VC = 4;
 static NSString *P1Key = @"player1Name";
 static NSString *P2Key = @"player2Name";
 
+BOOL networkUp;
+
+
+
 @implementation ViewController
 
 @synthesize localPlayButton;
@@ -28,11 +32,15 @@ static NSString *P2Key = @"player2Name";
 @synthesize namesButton;
 @synthesize namesMessageLabel;
 
+#pragma mark -
+#pragma mark View Controller Methods
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     namesMessageLabel.text = @"";
+    [self initialiseReachability];
 }
 
 - (void)viewDidUnload
@@ -46,53 +54,81 @@ static NSString *P2Key = @"player2Name";
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+#pragma mark -
+#pragma mark Button press Methods
+
 - (IBAction)localPlayPressed:(id)sender
 {
     NSLog(@"Local play pressed");
-    
-    //check names
-    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
-    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
-    
-    //if neither name is blank
-    if ([name1 length] != 0 && [name2 length] != 0)
-    {
-        namesMessageLabel.text = @"";
-        [self pushView:localPlayVC :LOCAL_VC];
-    }
-    
-    else 
-    {
-        namesMessageLabel.text = @"Need both player names!";
-    }
+    [self doLocalPlay];
 }
 
 - (IBAction)networkPlayPressed:(id)sender
 {
-    NSLog(@"Network play pressed");  
-    
-    [self pushView:networkPlayVC :NETWORK_VC];
+    NSLog(@"Network play pressed");
+    [self doNetworkPlay];
 }
 
 - (IBAction)namesPressed:(id)sender
 {
-    NSLog(@"Player names play pressed");
-    
+    NSLog(@"Player names play pressed");    
     [self pushView:namesVC :NAMES_VC]; 
 }
 
 - (IBAction)aboutPressed:(id)sender
 {
     NSLog(@"About game pressed");
-    
     [self pushView:aboutVC :ABOUT_VC]; 
 }
 
+#pragma mark -
+#pragma mark Menu logic methods
+
+-(void)doLocalPlay
+{
+    //proceed if both names aren't blank
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:P1Key] length] != 0 && 
+        [[[NSUserDefaults standardUserDefaults] stringForKey:P2Key] length] != 0)
+    {
+        namesMessageLabel.text = @"";
+        [self pushView:localPlayVC :LOCAL_VC];
+    }
+    //otherwise print a message
+    else 
+    {
+        namesMessageLabel.text = @"Need both player names!";
+    }
+}
+
+-(void)doNetworkPlay
+{
+    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
+    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+    
+    //proceed if both names aren't blank
+    if ([name1 length] != 0 || [name2 length] != 0)
+    {
+        namesMessageLabel.text = @"";
+        
+        if (!networkUp)
+        {
+            NSLog(@"Network unavailable");
+            namesMessageLabel.text = @"Network unavailable";
+        }
+        else
+        {
+            [self pushView:networkPlayVC :NETWORK_VC];
+        }        
+    }
+    else 
+    {
+        namesMessageLabel.text = @"Need a player name!";
+    }
+}
 
 - (void)pushView:(UIViewController*)nextVC:(int)viewControllerNum
 {
-    if (nil == nextVC)
-    {
+
         switch (viewControllerNum){
             
             case 1: //LOCAL_VC
@@ -114,18 +150,66 @@ static NSString *P2Key = @"player2Name";
             case 4: //ABOUT_VC
                 aboutVC=[[AboutViewController alloc] init];
                 nextVC=aboutVC;
+                //add network status iVar
+                aboutVC.networkUP = networkUp;
+                
                 break;
             
             default:
                 break;
         }
-    }
         
     [self.navigationController pushViewController:nextVC animated:NO];
 }
 
+#pragma mark -
+#pragma mark Network methods
 
+-(void)initialiseReachability
+{
+    // Our code to get updates from the reachability class go here
+    
+    // First, register to receive "kReachabilityChangedNotification" notifications
+    // - we tell the notification center to call our checkNetworkStatus: selector
+    [[NSNotificationCenter defaultCenter] 
+     addObserver:self 
+     selector:@selector(checkNetworkStatus:)
+     name:kReachabilityChangedNotification
+     object:nil];
+    
+    // now create an instance of the reachability class that will monitor for
+    // changes to internet connectivity
+    internetReachable = [Reachability reachabilityForInternetConnection];
+    
+    // now that the reachability object exists, tell it to start it's notifier
+    [internetReachable startNotifier];
+    
+    // let's just check right now whether the network is up or down by asking directly
+    // but note that the checkNetworkStatus selector will be called automatically
+    // whenever the network status changes
+    [self checkNetworkStatus:nil];
+}
 
+// this selector is called 
+- (void) checkNetworkStatus:(NSNotification *)notice
+{
+	NetworkStatus netStat = [internetReachable currentReachabilityStatus];
+	switch (netStat)
+	{
+		case NotReachable:
+		{
+			NSLog(@"The network is down.");
+            networkUp = false;
+			break;
+		}
+		default:
+		{
+			NSLog(@"The network is up.");
+            networkUp = true;
+			break;
+		}
+	}
+}
 
 
 @end
