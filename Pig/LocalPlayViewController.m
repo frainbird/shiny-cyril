@@ -13,46 +13,58 @@
 @end
 
 //local variables
-NSString* Player1Name = @"";
-NSString* Player2Name = @"";
 
-NSURL *rollSoundURL;
-SystemSoundID rollSoundID;
-NSURL *loudPigSoundURL;
-SystemSoundID loudPigSoundID;
+//local constants
+const int PLAYER1 = 1;
+const int PLAYER2 = 2;
+const int WINNING_SCORE = 100;
 
-static NSString *P1Key = @"player1Name";
-static NSString *P2Key = @"player2Name";
+//sound variables
+NSURL           *rollSoundURL;
+SystemSoundID    rollSoundID;
+NSURL           *loudPigSoundURL;
+SystemSoundID    loudPigSoundID;
 
-int currentPlayer; //may be better to implement as int
-int die1; //value of die face
-int die2; //value of die face
-int roundScore;
+//player names
+NSString *Player1Name = @"";
+NSString *Player2Name = @"";
+
+//main game variables ints
+int currentPlayer;  
+int die1;           //value of die face
+int die2;           //value of die face
+int roundScore;     
 int player1Total;
 int player2Total;
-static int PLAYER1 = 1;
-static int PLAYER2 = 2;
-static int WINNING_SCORE = 100;
 int ones; //how many dice with face "1" were rolled (values 0, 1, 2)
+
 NSString *rollResultMessage[3]={@"Roll score:", @"A one! Score nothing", @"Two ones! Lose all points"};
-BOOL rollAgain;
+
+BOOL rollAgain; //controls if the player may roll again this turn
 
 
-                                              
 @implementation LocalPlayViewController
 
+//buttons
 @synthesize rollButton;
 @synthesize holdButton;
 @synthesize exitButton;
 
+//dice images
 @synthesize die1View;
 @synthesize die2View;
+
+//screen labels
 @synthesize rollResultLabel;
 @synthesize roundScoreLabel;
 @synthesize player1ScoreLabel;
 @synthesize player2ScoreLabel;
 @synthesize player1NameLabel;
 @synthesize player2NameLabel;
+
+
+#pragma mark -
+#pragma mark View Controller Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,14 +94,43 @@ BOOL rollAgain;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)playGame
+#pragma mark -
+#pragma mark Button Press Methods
+
+-(IBAction)rollButtonPressed:(id)sender
 {
-    NSLog(@"Play game started");
-    [self getStartingPlayer];
-    [self resetGame];
-    [self loadGameElements];
-    [self initialiseSounds];
+    NSLog(@"roll button pressed");
+    AudioServicesPlaySystemSound(rollSoundID);
+    [self rollDice];
+    [self showDice];
+    [self evaluateDice];
+    [self calculateScore:true]; //true: roll press is sending the message
+    [self showRollResult];
+    [self showScoreLabels];
+    [self playResultSound];
+    if (!rollAgain)
+    {
+        [self changePlayers];
+    }
 }
+
+-(IBAction)holdButtonPressed:(id)sender
+{
+    NSLog(@"hold button pressed");
+    [self calculateScore:false]; //false: roll press isn't sending the message
+    [self showScoreLabels];
+    [self evaluateRound];
+}
+
+-(IBAction)exitButtonPressed:(id)sender
+{
+    [self exitToMenu];
+}
+
+
+
+#pragma mark -
+#pragma mark Sound Methods
 
 -(void)initialiseSounds
 {
@@ -103,88 +144,19 @@ BOOL rollAgain;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) loudPigSoundURL, &loudPigSoundID);  
 }
 
-- (void)getStartingPlayer
+-(void)playResultSound
 {
-    NSLog(@"getStartingPlayer started");
-    //check for both player names
-    [self readNames];
-    [self chooseStartingPlayer];
-
-}
-
-
--(void)readNames
-{
-    NSLog(@"readNames started");
-    //read in names
-    
-    Player1Name = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
-    Player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
-}
-
--(void)chooseStartingPlayer
-{
-    NSLog(@"chooseStartingPlayer started");
-    //popup a view to choose who is starting
-    //players can choose either player, or flip a coin to determine    
-    
-}
-
-
-- (void)resetGame
-{
-    NSLog(@"resetGame started");
-    currentPlayer = 1;
-    roundScore = 0;
-    player1Total = 0; //start at 0
-    player2Total = 0; //start at 0
-    die1 = 0;
-    die2 = 0;
-}
-
--(void)loadGameElements
-{
-    NSLog(@"loadGameElements started");
-    rollResultLabel.text=[NSString stringWithFormat:@"%@ to go first", Player1Name];
-    [self showScoreLabels];
-    [self showPlayerNames];
-    [self highlightCurrentPlayer:currentPlayer];
-}
-
--(IBAction)rollButtonPressed:(id)sender
-{
-    NSLog(@"roll button pressed");
-    AudioServicesPlaySystemSound(rollSoundID);
-    [self rollDice];
-    [self showDice];
-    [self evaluateDice];
-    [self calculateScore:true];
-    [self showRollResult];
-    [self showScoreLabels];
-    [self playResultSound];
-    if (!rollAgain)
+    NSLog(@"playResultSound, ones is: %d",ones);
+    if (ones == 2)
     {
-        [self changePlayers];
+        AudioServicesPlaySystemSound(loudPigSoundID);
     }
 }
 
--(IBAction)holdButtonPressed:(id)sender
-{
-    NSLog(@"hold button pressed");
-    [self calculateScore:false];
-    [self showScoreLabels];
-    [self evaluateRound];
-}
 
--(void)rollDice
-{
-    NSLog(@"rollDice started");
-    //generate random number between 0 and 5
-	die1 = arc4random() % 6 + 1;
-    die2 = arc4random() % 6 + 1;
-    NSLog(@"RD: Die1 is a %d", die1);
-    NSLog(@"RD: Die2 is a %d", die2);
-}
+#pragma mark -
+#pragma mark Basic UI Methods
+
 
 -(void)showPlayerNames
 {
@@ -192,35 +164,14 @@ BOOL rollAgain;
     player2NameLabel.text = Player2Name;
 }
 
+
 -(void)showDice
 {
     NSLog(@"showDice started");
     //display dice on screen
-        
+    
     die1View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die1]];
     die2View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die2]];
-}
-
--(void)evaluateDice
-{
-    NSLog(@"evaluateDice started");
-    if (die1 == 1 && die2 == 1)
-    {
-        ones = 2;
-        rollAgain = false;
-    }
-    
-    else if (die1 == 1 || die2 == 1)
-    {
-        ones = 1;
-        rollAgain = false;
-    }
-
-    else
-    {
-        ones = 0;
-        rollAgain = true;
-    }
 }
 
 
@@ -247,10 +198,164 @@ BOOL rollAgain;
     rollResultLabel.text = message;
 }
 
+
+-(void)showScoreLabels
+{
+    NSLog(@"showScoreLabels started");
+    //if (!rollAgain)
+    //{
+    //    rollResultLabel.text = [NSString stringWithFormat:@"Player %d to roll", currentPlayer];
+    // }
+    roundScoreLabel.text = [NSString stringWithFormat:@"Round: %d", roundScore];
+    player1ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player1Name, player1Total];
+    player2ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player2Name, player2Total];
+}
+
+-(void)showWinnerMessage:(int)winningPlayer
+{
+    NSLog(@"Player %d wins", winningPlayer);
+    if (winningPlayer == PLAYER1)
+    {
+        NSLog(@"%@ wins!", Player1Name);
+    }
+    if (winningPlayer == PLAYER2) 
+    {
+        NSLog(@"%@ wins!", Player2Name);
+    }
+    
+    NSLog(@"Please press exit");
+}
+
+-(void)highlightCurrentPlayer:(int)player
+{
+    NSLog(@"highlightCurrentPlayer started");
+    if (currentPlayer == PLAYER1)
+    {
+        player1NameLabel.textColor = [UIColor redColor];
+        player2NameLabel.textColor = [UIColor whiteColor];
+    }
+    
+    if (currentPlayer == PLAYER2)
+    {
+        player1NameLabel.textColor = [UIColor whiteColor];
+        player2NameLabel.textColor = [UIColor redColor];
+    }
+}
+
+#pragma mark -
+#pragma mark Animation Methods
+
+#pragma mark -
+#pragma mark Init/Exit Methods
+
+
+- (void)resetGame
+{
+    NSLog(@"resetGame started");
+    currentPlayer = 1;
+    roundScore = 0;
+    player1Total = 0; //start at 0
+    player2Total = 0; //start at 0
+    die1 = 0;
+    die2 = 0;
+}
+
+
+-(void)exitToMenu
+{
+    //call main menu view
+    [self resetGame];
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark -
+#pragma mark Game Logic Methods
+
+- (void)playGame
+{
+    NSLog(@"Play game started");
+    [self getStartingPlayer];
+    [self resetGame];
+    [self loadGameElements];
+    [self initialiseSounds];
+}
+
+- (void)getStartingPlayer
+{
+    NSLog(@"getStartingPlayer started");
+    //check for both player names
+    [self readNames];
+    [self chooseStartingPlayer];
+
+}
+
+-(void)loadGameElements
+{
+    NSLog(@"loadGameElements started");
+    rollResultLabel.text=[NSString stringWithFormat:@"%@ to go first", Player1Name]; //NOTE: just a place-holder message
+    [self showScoreLabels];
+    [self showPlayerNames];
+    [self highlightCurrentPlayer:currentPlayer];
+}
+
+
+-(void)readNames 
+{
+    //read in names from user defaults
+    NSLog(@"readNames started");
+        
+    Player1Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
+    Player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
+}
+
+-(void)chooseStartingPlayer
+{
+    NSLog(@"chooseStartingPlayer started");
+    //show a view to choose who is starting
+    //players can choose either player, or flip a coin to determine    
+}
+
+
+-(void)rollDice 
+{
+    NSLog(@"rollDice started");
+    //generate random number between 0 and 5
+	die1 = arc4random() % 6 + 1;
+    die2 = arc4random() % 6 + 1;
+    NSLog(@"RD: Die1 is a %d", die1);
+    NSLog(@"RD: Die2 is a %d", die2);
+}
+
+
+-(void)evaluateDice
+{
+    //check to see how many ones we've rolled
+    NSLog(@"evaluateDice started");
+    if (die1 == 1 && die2 == 1)
+    {
+        ones = 2;
+        rollAgain = false;
+    }
+    
+    else if (die1 == 1 || die2 == 1)
+    {
+        ones = 1;
+        rollAgain = false;
+    }
+
+    else
+    {
+        ones = 0;
+        rollAgain = true;
+    }
+}
+
+
 -(void)calculateScore:(BOOL)rollPress
 {
+    //calculate a player's score depending on what button was pressed and dice that were rolled
     NSLog(@"calculateScore, %d", rollPress);
-    
+        
     if (rollPress)
     {
         switch (ones)
@@ -294,6 +399,7 @@ BOOL rollAgain;
 
 -(void)resetTotalScore:(int)player
 {
+    //set chosen player's score to zero
     NSLog(@"resetTotalScore started");
     if (player == PLAYER1)
     {
@@ -305,20 +411,10 @@ BOOL rollAgain;
     }
 }
 
--(void)showScoreLabels
-{
-    NSLog(@"showScoreLabels started");
-    //if (!rollAgain)
-    //{
-    //    rollResultLabel.text = [NSString stringWithFormat:@"Player %d to roll", currentPlayer];
-   // }
-    roundScoreLabel.text = [NSString stringWithFormat:@"Round: %d", roundScore];
-    player1ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player1Name, player1Total];
-    player2ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player2Name, player2Total];
-}
 
 -(void)evaluateRound
 {
+    //see if the round resulted in a win, if not change players and keep going
     int winningPlayer = [self checkWinner];
     
     if (winningPlayer == 0)
@@ -334,23 +430,10 @@ BOOL rollAgain;
     
 }
 
--(void)showWinnerMessage:(int)winningPlayer
-{
-    NSLog(@"Player %d wins", winningPlayer);
-    if (winningPlayer == PLAYER1)
-    {
-        NSLog(@"%@ wins!", Player1Name);
-    }
-    if (winningPlayer == PLAYER2) 
-    {
-        NSLog(@"%@ wins!", Player2Name);
-    }
-    
-    NSLog(@"Please press exit");
-}
 
 -(int)checkWinner
 {
+    //see if a player has reached the winning score
     NSLog(@"checkWinner started");
     int winner;
     
@@ -375,6 +458,7 @@ BOOL rollAgain;
 
 -(void)changePlayers
 {
+    //switch players
     NSLog(@"changePlayers started, currentplayer was %d", currentPlayer);
     if (currentPlayer == PLAYER1)
     {
@@ -386,43 +470,6 @@ BOOL rollAgain;
     }
     NSLog(@"CP: currentplayer is now %d", currentPlayer);
     [self highlightCurrentPlayer:currentPlayer];
-}
-
--(void)highlightCurrentPlayer:(int)player
-{
-    NSLog(@"highlightCurrentPlayer started");
-    if (currentPlayer == PLAYER1)
-    {
-        player1NameLabel.textColor = [UIColor redColor];
-        player2NameLabel.textColor = [UIColor whiteColor];
-    }
-    
-    if (currentPlayer == PLAYER2)
-    {
-        player1NameLabel.textColor = [UIColor whiteColor];
-        player2NameLabel.textColor = [UIColor redColor];
-    }
-}
-
--(void)playResultSound
-{
-    NSLog(@"playResultSound, ones is: %d",ones);
-    if (ones == 2)
-    {
-        AudioServicesPlaySystemSound(loudPigSoundID);
-    }
-}
-
--(IBAction)exitButtonPressed:(id)sender
-{
-    [self exitToMenu];
-}
-
--(void)exitToMenu
-{
-    //call main menu view
-    [self resetGame];
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

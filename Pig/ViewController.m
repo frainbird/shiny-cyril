@@ -12,16 +12,11 @@
 
 @end
 
-static int LOCAL_VC = 1;
-static int NETWORK_VC = 2;
-static int NAMES_VC = 3;
-static int ABOUT_VC = 4;
-
-static NSString *P1Key = @"player1Name";
-static NSString *P2Key = @"player2Name";
-
+const int LOCAL_VC   = 1;
+const int NETWORK_VC = 2;
+const int NAMES_VC   = 3;
+const int ABOUT_VC   = 4;
 BOOL networkUp;
-
 
 
 @implementation ViewController
@@ -55,7 +50,7 @@ BOOL networkUp;
 }
 
 #pragma mark -
-#pragma mark Button press Methods
+#pragma mark Button Press Methods
 
 - (IBAction)localPlayPressed:(id)sender
 {
@@ -82,13 +77,13 @@ BOOL networkUp;
 }
 
 #pragma mark -
-#pragma mark Menu logic methods
+#pragma mark Menu Logic Methods
 
 -(void)doLocalPlay
 {
     //proceed if both names aren't blank
-    if ([[[NSUserDefaults standardUserDefaults] stringForKey:P1Key] length] != 0 && 
-        [[[NSUserDefaults standardUserDefaults] stringForKey:P2Key] length] != 0)
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY] length] != 0 && 
+        [[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY] length] != 0)
     {
         namesMessageLabel.text = @"";
         [self pushView:localPlayVC :LOCAL_VC];
@@ -102,8 +97,8 @@ BOOL networkUp;
 
 -(void)doNetworkPlay
 {
-    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
-    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
+    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
     
     //proceed if both names aren't blank
     if ([name1 length] != 0 || [name2 length] != 0)
@@ -163,7 +158,7 @@ BOOL networkUp;
 }
 
 #pragma mark -
-#pragma mark Network methods
+#pragma mark Network Methods
 
 -(void)initialiseReachability
 {

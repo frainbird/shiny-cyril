@@ -36,6 +36,7 @@
 		DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */; };
 		DD45D6D8160C1AB50082FAB0 /* NetworkPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D6160C1AB50082FAB0 /* NetworkPlayViewController.m */; };
 		DD45D6D9160C1AB50082FAB0 /* NetworkPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D7160C1AB50082FAB0 /* NetworkPlayViewController.xib */; };
+		DD62B690161EDBC300CB4D62 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD62B68F161EDBC300CB4D62 /* Constants.m */; };
 		DD6A2039161E8F1600EACE2F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DD6A2038161E8F1600EACE2F /* index.html */; };
 		DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */; };
 		DDEBE8C2161E6BFD009B0580 /* diceboard.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDEBE8C0161E6BFD009B0580 /* diceboard.wav */; };
@@ -85,6 +86,8 @@
 		DD45D6D5160C1AB50082FAB0 /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
 		DD45D6D6160C1AB50082FAB0 /* NetworkPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPlayViewController.m; sourceTree = "<group>"; };
 		DD45D6D7160C1AB50082FAB0 /* NetworkPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkPlayViewController.xib; sourceTree = "<group>"; };
+		DD62B68E161EDBC300CB4D62 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		DD62B68F161EDBC300CB4D62 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		DD6A2038161E8F1600EACE2F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DDEBE8C0161E6BFD009B0580 /* diceboard.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = diceboard.wav; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 		DD45D699160C14860082FAB0 /* Pig */ = {
 			isa = PBXGroup;
 			children = (
+				DD62B68E161EDBC300CB4D62 /* Constants.h */,
+				DD62B68F161EDBC300CB4D62 /* Constants.m */,
 				DDF9E1B2161E999500624E28 /* Reachability.h */,
 				DDF9E1B3161E999500624E28 /* Reachability.m */,
 				38ADE175161BC27F00BD369E /* res */,
@@ -329,6 +334,7 @@
 				DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */,
 				DD45D6D8160C1AB50082FAB0 /* NetworkPlayViewController.m in Sources */,
 				DDF9E1B4161E999500624E28 /* Reachability.m in Sources */,
+				DD62B690161EDBC300CB4D62 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

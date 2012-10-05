@@ -13,13 +13,16 @@
 @end
 
 
-NSString *ExternalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
+NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
 
 @implementation AboutViewController
 
 @synthesize aboutWebView;
 @synthesize networkUP;
 @synthesize backButton;
+
+#pragma mark -
+#pragma mark View Controller Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,12 +52,16 @@ NSString *ExternalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark -
+#pragma mark Other Methods
+
 - (void)showNetworkPage
 {
+    //show external page if network up, otherwise local page
     NSURL *theURL;
     if (networkUP)
     {
-        theURL = [NSURL URLWithString:ExternalURL];
+        theURL = [NSURL URLWithString:externalURL];
     }
     else 
     {

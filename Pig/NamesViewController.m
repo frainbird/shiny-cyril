@@ -8,6 +8,7 @@
 
 #import "NamesViewController.h"
 
+
 @interface NamesViewController ()
 
 @end
@@ -15,12 +16,9 @@
 NSString* P1Name = @"";
 NSString* P2Name = @"";
 
-static NSString *P1Key = @"player1Name";
-static NSString *P2Key = @"player2Name";
-
-static int VALID = 0;
-static int BOTH_SAME = 1;
-static int BOTH_BLANK = 2;
+const int VALID = 0;
+const int BOTH_SAME = 1;
+const int BOTH_BLANK = 2;
 
 @implementation NamesViewController
 
@@ -31,6 +29,8 @@ static int BOTH_BLANK = 2;
 
 @synthesize acceptButton;
 
+#pragma mark -
+#pragma mark View Controller Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,10 +63,9 @@ static int BOTH_BLANK = 2;
 }
 
 
--(void)resetMessage
-{
-    messageLabel.text = @"Please enter player names";
-}
+
+#pragma mark -
+#pragma mark Button Press Methods
 
 -(IBAction)acceptButtonPressed:(id)sender
 {
@@ -89,6 +88,9 @@ static int BOTH_BLANK = 2;
     }
     
 }
+
+#pragma mark -
+#pragma mark Name Validation Methods
 
 -(int)validateNames
 {
@@ -120,8 +122,8 @@ static int BOTH_BLANK = 2;
 {
     //read in names
     
-    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
-    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
+    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
     
     //store them in variables if something is in them
     if (![name1 length] == 0)
@@ -139,8 +141,16 @@ static int BOTH_BLANK = 2;
 -(void)writeNames
 {   
     //write names to file
-    [[NSUserDefaults standardUserDefaults] setObject:P1Name forKey:P1Key];
-    [[NSUserDefaults standardUserDefaults] setObject:P2Name forKey:P2Key];
+    [[NSUserDefaults standardUserDefaults] setObject:P1Name forKey:PLAYER1_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:P2Name forKey:PLAYER2_KEY];
+}
+
+#pragma mark -
+#pragma mark Init/Exit Methods
+
+-(void)resetMessage
+{
+    messageLabel.text = @"Please enter player names";
 }
 
 -(void)exitToMenu

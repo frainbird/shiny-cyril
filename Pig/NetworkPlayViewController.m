@@ -12,9 +12,8 @@
 
 @end
 
-NSString *PlayerName = @"Michael";
-#define kMaxTankPacketSize 1024
-int gamePacketNumber = 0;
+NSString *localPlayerName = @"";
+NSString *remotePlayerName = @"";
 
 @implementation NetworkPlayViewController
 
@@ -23,6 +22,8 @@ int gamePacketNumber = 0;
 @synthesize gameSession;
 @synthesize exitButton;
 
+#pragma mark -
+#pragma mark View Controller Methods
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +69,9 @@ int gamePacketNumber = 0;
 }
 
 
+#pragma mark -
+#pragma mark Peer Picker methods
+
 // this method is called by our code when we need to start looking for someome to play with
 -(void)startPicker
 {
@@ -110,7 +114,7 @@ int gamePacketNumber = 0;
 - (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type 
 { 
     NSLog (@"creating a session ID for Game Kit");
-    GKSession *session = [[GKSession alloc] initWithSessionID:nil displayName:PlayerName sessionMode:GKSessionModePeer]; 
+    GKSession *session = [[GKSession alloc] initWithSessionID:nil displayName:localPlayerName sessionMode:GKSessionModePeer]; 
     return session;
 }
 
@@ -246,6 +250,29 @@ int gamePacketNumber = 0;
 -(IBAction)exitButtonPressed:(id)sender
 {
     [self exitToMenu];
+}
+
+#pragma mark -
+#pragma mark Game Logic Methods
+
+-(void)readPlayerName
+{
+        //read in names from user defaults
+        
+        NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
+        NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
+        
+        //the first name that is not empty becomes the player's name
+        if (![name1 length] == 0)
+        {
+            localPlayerName = name1;
+        }
+        
+        else if (![name2 length] == 0)
+        {
+            localPlayerName = name2;
+        }
+
 }
 
 -(void)exitToMenu

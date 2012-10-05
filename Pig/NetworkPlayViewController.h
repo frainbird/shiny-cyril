@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
-
+#import "Constants.h"
 @interface NetworkPlayViewController : UIViewController
 {
-    IBOutlet UIButton *exitButton;
+    IBOutlet UIButton    *exitButton;
     IBOutlet UITextField *messageText;
     NSString    *gamePeerID;
     GKSession   *gameSession;
