@@ -7,4 +7,4 @@
 //
 
 NSString *const PLAYER1_KEY = @"player1key";
-NSString *const PLAYER2_KEY = @"player1key";
+NSString *const PLAYER2_KEY = @"player2key";

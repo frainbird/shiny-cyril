@@ -17,10 +17,13 @@ const int NETWORK_VC = 2;
 const int NAMES_VC   = 3;
 const int ABOUT_VC   = 4;
 BOOL networkUp;
+BOOL musicPlay = true;
 
+//AVAudioPlayer           *audioPlayer;
 
 @implementation ViewController
 
+@synthesize muteButton;
 @synthesize localPlayButton;
 @synthesize networkPlayButton;
 @synthesize aboutButton;
@@ -36,12 +39,19 @@ BOOL networkUp;
 	// Do any additional setup after loading the view, typically from a nib.
     namesMessageLabel.text = @"";
     [self initialiseReachability];
+    [self initMusic];
+    [self playMusic];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self resetMessage];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -76,8 +86,71 @@ BOOL networkUp;
     [self pushView:aboutVC :ABOUT_VC]; 
 }
 
+-(IBAction)muteButtonPressed:(id)sender
+{
+    NSLog(@"Mute button pressed: %d",musicPlay);
+    if (musicPlay)
+    {
+        [self stopMusic];
+         musicPlay = false;
+        
+        //swap images         
+        UIImage * btnImage1 = [UIImage imageNamed:@"sound_mute.png"];
+        [muteButton setImage:btnImage1 forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        [self playMusic];
+        UIImage * btnImage2 = [UIImage imageNamed:@"sound.png"];
+        
+        //swap images
+        [muteButton setImage:btnImage2 forState:UIControlStateNormal];
+        musicPlay = true;
+    }
+
+        
+}
+
 #pragma mark -
-#pragma mark Menu Logic Methods
+#pragma mark Sound Methods
+
+-(void)initMusic
+{
+
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                         pathForResource:@"theme1"
+                                         ofType:@"mp3"]];
+
+	NSError *error;
+	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if (error)
+    {
+        NSLog(@"Error in audioPlayer: %@", 
+              [error localizedDescription]);
+    } else {
+        audioPlayer.delegate = self;
+        [audioPlayer prepareToPlay];
+    }
+}
+
+-(void)playMusic
+{
+    [audioPlayer play];
+}
+
+-(void)stopMusic
+{
+    [audioPlayer stop];
+}
+
+#pragma mark -
+#pragma mark Menu Methods
+
+-(void)resetMessage
+{
+    namesMessageLabel.text = @"";
+}
 
 -(void)doLocalPlay
 {
@@ -85,7 +158,7 @@ BOOL networkUp;
     if ([[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY] length] != 0 && 
         [[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY] length] != 0)
     {
-        namesMessageLabel.text = @"";
+        [self resetMessage];
         [self pushView:localPlayVC :LOCAL_VC];
     }
     //otherwise print a message

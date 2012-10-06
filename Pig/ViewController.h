@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 #import "Constants.h"
 #import "Reachability.h"
@@ -17,7 +18,7 @@
 #import "NetworkPlayViewController.h"
 
 
-@interface ViewController : UIViewController<UIAccelerometerDelegate,GKPeerPickerControllerDelegate,GKSessionDelegate>
+@interface ViewController : UIViewController<UIAccelerometerDelegate,GKPeerPickerControllerDelegate,GKSessionDelegate,AVAudioPlayerDelegate>
 {
     
     AboutViewController     *aboutVC;
@@ -26,16 +27,19 @@
     NetworkPlayViewController *networkPlayVC;
     
     Reachability            *internetReachable;
-        
+    AVAudioPlayer           *audioPlayer;
+    
+    IBOutlet UIButton       *muteButton;
     IBOutlet UIButton       *aboutButton;
     IBOutlet UIButton       *localPlayButton;
     IBOutlet UIButton       *namesButton;
     IBOutlet UIButton       *networkPlayButton;
     IBOutlet UILabel        *namesMessageLabel;
+
 }
 
 
-
+@property (nonatomic,retain) UIButton *muteButton;
 @property (nonatomic,retain) UIButton *aboutButton;
 @property (nonatomic,retain) UIButton *localPlayButton;
 @property (nonatomic,retain) UIButton *namesButton;
@@ -47,5 +51,6 @@
 -(IBAction)networkPlayPressed:(id)sender;
 -(IBAction)namesPressed:(id)sender;
 -(IBAction)aboutPressed:(id)sender;
+-(IBAction)muteButtonPressed:(id)sender;
 
 @end

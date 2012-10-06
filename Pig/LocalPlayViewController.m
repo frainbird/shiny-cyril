@@ -22,8 +22,15 @@ const int WINNING_SCORE = 100;
 //sound variables
 NSURL           *rollSoundURL;
 SystemSoundID    rollSoundID;
-NSURL           *loudPigSoundURL;
-SystemSoundID    loudPigSoundID;
+
+NSURL           *holdSoundURL;
+SystemSoundID    holdSoundID;
+
+NSURL           *pigSound1URL; //sound for one 'pig' die
+SystemSoundID    pigSound1ID;
+
+NSURL           *pigSound2URL; //sound for two 'pig' dice
+SystemSoundID    pigSound2ID;
 
 //player names
 NSString *Player1Name = @"";
@@ -120,6 +127,7 @@ BOOL rollAgain; //controls if the player may roll again this turn
     [self calculateScore:false]; //false: roll press isn't sending the message
     [self showScoreLabels];
     [self evaluateRound];
+    [self playSound:holdSoundID];
 }
 
 -(IBAction)exitButtonPressed:(id)sender
@@ -135,24 +143,48 @@ BOOL rollAgain; //controls if the player may roll again this turn
 -(void)initialiseSounds
 {
     rollSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
-                             pathForResource:@"rollSound" 
+                             pathForResource:@"rollSound2" 
                              ofType:@"wav"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) rollSoundURL, &rollSoundID);    
-    loudPigSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
-                                           pathForResource:@"pigSound" 
+    
+    holdSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                           pathForResource:@"holdSound" 
                                            ofType:@"wav"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef) loudPigSoundURL, &loudPigSoundID);  
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) holdSoundURL, &holdSoundID);    
+    
+    pigSound1URL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                           pathForResource:@"pigSound1" 
+                                           ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pigSound1URL, &pigSound1ID);
+    
+    pigSound2URL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                              pathForResource:@"pigSound2" 
+                                              ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pigSound2URL, &pigSound2ID); 
 }
 
 -(void)playResultSound
 {
     NSLog(@"playResultSound, ones is: %d",ones);
+    if (ones == 0)
+    {
+        //AudioServicesPlaySystemSound(pigSound1ID);
+    }
+    
+    if (ones == 1)
+    {
+        AudioServicesPlaySystemSound(pigSound1ID);
+    }
     if (ones == 2)
     {
-        AudioServicesPlaySystemSound(loudPigSoundID);
+        AudioServicesPlaySystemSound(pigSound2ID);
     }
 }
 
+-(void)playSound:(SystemSoundID)soundID
+{
+    AudioServicesPlaySystemSound(soundID);
+}
 
 #pragma mark -
 #pragma mark Basic UI Methods
