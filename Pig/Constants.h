@@ -10,7 +10,7 @@ NSString *const PLAYER1_KEY;
 NSString *const PLAYER2_KEY;
 
 //used in net/local play
-NSString *const rollResultMessage[3];
+NSString *const rollResultMessage[4];
 
 const int PLAYER1;
 const int PLAYER2;

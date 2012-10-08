@@ -82,17 +82,10 @@
 {
     NSLog(@"roll button pressed");
     AudioServicesPlaySystemSound(rollSoundID);
+    rollResultLabel.text = rollResultMessage[3];
     [self rollDice];
     [self showDice];
-    [self evaluateDice];
-    [self calculateScore:true]; //true: roll press is sending the message
-    [self showRollResult];
-    [self showScoreLabels];
-    [self playResultSound];
-    if (!rollAgain)
-    {
-        [self changePlayers];
-    }
+    
 }
 
 -(IBAction)holdButtonPressed:(id)sender
@@ -100,9 +93,10 @@
     NSLog(@"hold button pressed");
     rollAgain = false;
     [self calculateScore:false]; //false: roll press isn't sending the message
-    [self showScoreLabels];
-    [self evaluateRound];
+    
+    //[self evaluateRound];
     [self playSound:holdSoundID];
+    [self animateRoundScore];
 }
 
 -(IBAction)exitButtonPressed:(id)sender
@@ -179,6 +173,8 @@
     
     die1View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die1]];
     die2View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die2]];
+    
+    [self animateDice];
 }
 
 
@@ -207,6 +203,11 @@
     
 }
 
+-(void)setRoundScoreLabelText:(NSString*)value
+{
+    roundScoreLabel.text = value;
+    
+}
 
 -(void)showScoreLabels
 {
@@ -240,6 +241,147 @@
 
 #pragma mark -
 #pragma mark Animation Methods
+
+-(void)animateDice
+{
+    self.view.userInteractionEnabled=NO;
+    NSArray *diceImages=[NSArray arrayWithObjects:[UIImage imageNamed:@"dice1.png"],[UIImage imageNamed:@"dice2.png"],[UIImage imageNamed:@"dice3.png"],[UIImage imageNamed:@"dice4.png"],[UIImage imageNamed:@"dice5.png"],[UIImage imageNamed:@"dice6.png"],nil];
+
+    die1View.animationImages=diceImages;
+    die1View.animationDuration=0.5;
+    die1View.animationRepeatCount=2;
+    
+    die2View.animationImages=diceImages;
+    die2View.animationDuration=0.5;
+    die2View.animationRepeatCount=2;
+    
+    [die1View startAnimating];
+    [die2View startAnimating];
+
+    [self performSelector:@selector(animateDiceEnds) withObject:nil afterDelay:1.0];//do this when animation ends
+
+//timer=[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+}
+
+
+-(void)animateDiceEnds{
+    [self evaluateDice];
+    [self calculateScore:true]; //true: roll press is sending the message
+    [self showRollResult];
+    [self animateRollScore];
+    //[self showScoreLabels];
+    [self playResultSound];
+    
+    self.view.userInteractionEnabled=YES;
+    
+
+}
+
+-(void)animateRollScore
+{
+    //move roll Score onto Round score, then increment
+    
+    if (ones == 1)
+    {
+        rollScoreLabel.text = [NSString stringWithFormat:@"%d",0];
+    }
+    [UILabel animateWithDuration:0.5
+                          delay: 0.5
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         rollScoreLabel.transform = CGAffineTransformMakeTranslation(0, 40);
+                     }
+                     completion:^(BOOL finished){
+                         
+                         //update roll score
+                         if (rollAgain)
+                         {
+                             [self showScoreLabels];
+                         }
+                         rollScoreLabel.text = @"";
+                         //need to reset rollResult label
+                         [UILabel animateWithDuration:0.0
+                                                delay: 0.1
+                                              options: UIViewAnimationCurveEaseOut
+                                           animations:^{
+                                               rollScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
+                                           }
+                                           completion:^(BOOL finished){
+                                               //nothing
+                                               if(!rollAgain)
+                                               {
+                                                   [self animateRoundScore];
+                                               }
+                                           }];
+                         
+
+                     }];  
+}
+
+-(void)animateRoundScore
+{
+    //more Round Score onto current player's total score, then change players
+    NSLog(@"animateRoundScore started, ones is %d",ones);
+    if (ones == 1)
+    {
+        //animate ones away
+        [UILabel animateWithDuration:0.8
+                               delay: 0.1
+                             options: UIViewAnimationCurveEaseOut
+                          animations:^{
+                              roundScoreLabel.transform = CGAffineTransformMakeTranslation(150, 0);
+                          }
+                          completion:^(BOOL finished){
+                              [self setRoundScoreLabelText:@""];
+                                                            
+                            //reset position (i'm sure there's an easier way to do this)
+                              roundScoreLabel.hidden = YES;
+                              [UILabel animateWithDuration:0.0
+                                                     delay: 0.5
+                                                   options: UIViewAnimationCurveEaseOut
+                                                animations:^{
+                                                    roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
+                                                }
+                                                completion:^(BOOL finished){
+                                                    [self showScoreLabels];
+                                                    [self evaluateRound];
+                                                    roundScoreLabel.hidden = YES;
+                                                }];
+                          }];
+        
+    }
+    else {
+    
+    if (ones == 2)
+    {
+        roundScoreLabel.text = [NSString stringWithFormat:@"%d",roundScore];
+    }
+        
+    [UILabel animateWithDuration:0.5
+                           delay: 0.1
+                         options: UIViewAnimationCurveEaseOut
+                      animations:^{
+                          roundScoreLabel.transform = CGAffineTransformMakeTranslation(30, 60);
+                      }
+                      completion:^(BOOL finished){
+                          //need to reset roundScore label position
+                          [UILabel animateWithDuration:0.0
+                                                 delay: 0.1
+                                               options: UIViewAnimationCurveEaseOut
+                                            animations:^{
+                                                roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
+                                            }
+                                            completion:^(BOOL finished){
+                                                //nothing
+                                                [self showScoreLabels];
+                                                [self evaluateRound];
+                                            }];
+
+                      }];
+    
+    }
+}
+
 
 -(void)showFlipCoinView
 {
@@ -338,8 +480,8 @@
         ypos2 = -60;
     }
    
-    [UIView animateWithDuration:0.8
-                          delay: 0.5
+    [UIView animateWithDuration:0.7
+                          delay: 0.3
                         options: UIViewAnimationCurveEaseInOut
                      animations:^{
                          player1View.transform = CGAffineTransformMakeTranslation(xpos1, ypos1);
@@ -347,8 +489,8 @@
                      completion:^(BOOL finished){
                          //do nothing
                      }];
-    [UIView animateWithDuration:0.8
-                           delay: 0.5
+    [UIView animateWithDuration:0.7
+                           delay: 0.3
                          options: UIViewAnimationCurveEaseInOut
                       animations:^{
                           player2View.transform = CGAffineTransformMakeTranslation(xpos2, ypos2);

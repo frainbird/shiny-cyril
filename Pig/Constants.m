@@ -10,7 +10,7 @@ NSString *const PLAYER1_KEY = @"player1key";
 NSString *const PLAYER2_KEY = @"player2key";
 
 //used in net/local play
-NSString *const rollResultMessage[3]={@"Score points!", @"A one! Score nothing", @"Two ones! Lose all points"};
+NSString *const rollResultMessage[4]={@"Score points!", @"A one! Score nothing", @"Two ones! Lose all points", @"Rolling..."};
 
 const int PLAYER1 = 1;
 const int PLAYER2 = 2;
