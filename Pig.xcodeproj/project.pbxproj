@@ -39,7 +39,6 @@
 		DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D1160C192E0082FAB0 /* AboutViewController.m */; };
 		DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */; };
 		DD62B690161EDBC300CB4D62 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD62B68F161EDBC300CB4D62 /* Constants.m */; };
-		DD63BEF6162263C700C7B92F /* heads.png in Resources */ = {isa = PBXBuildFile; fileRef = DD63BEF5162263C700C7B92F /* heads.png */; };
 		DD6A2039161E8F1600EACE2F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DD6A2038161E8F1600EACE2F /* index.html */; };
 		DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */; };
 		DDA636A1161FA29400DB1A50 /* holdSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A0161FA29400DB1A50 /* holdSound.wav */; };
@@ -97,7 +96,6 @@
 		DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		DD62B68E161EDBC300CB4D62 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DD62B68F161EDBC300CB4D62 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		DD63BEF5162263C700C7B92F /* heads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heads.png; sourceTree = "<group>"; };
 		DD6A2038161E8F1600EACE2F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DDA636A0161FA29400DB1A50 /* holdSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = holdSound.wav; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 		DDA636B4161FCA1F00DB1A50 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				DD63BEF5162263C700C7B92F /* heads.png */,
 				38ADE176161BC27F00BD369E /* background.png */,
 				38ADE177161BC27F00BD369E /* dice1.png */,
 				38ADE178161BC27F00BD369E /* dice2.png */,
@@ -374,7 +371,6 @@
 				DDA636B2161FC15E00DB1A50 /* sound.png in Resources */,
 				DDA636BC161FCFCB00DB1A50 /* theme1.mp3 in Resources */,
 				DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */,
-				DD63BEF6162263C700C7B92F /* heads.png in Resources */,
 				38051CEC1622D63C0019C826 /* OldstyHPLHS.otf in Resources */,
 				38051CED1622D63C0019C826 /* OldstyItaHPLHS.otf in Resources */,
 			);
