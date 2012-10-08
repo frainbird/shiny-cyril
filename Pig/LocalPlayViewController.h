@@ -37,6 +37,7 @@
     int currentPlayer;  
     int die1;           //value of die face
     int die2;           //value of die face
+    int rollScore;
     int roundScore;     
     int player1Total;
     int player2Total;
