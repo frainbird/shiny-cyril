@@ -16,6 +16,7 @@
 BOOL networkUp;
 BOOL musicPlay = true;
 
+
 //AVAudioPlayer           *audioPlayer;
 
 @implementation ViewController

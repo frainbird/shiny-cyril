@@ -8,6 +8,9 @@
 
 #import "LocalPlayViewController.h"
 
+
+UIFont *customFont;
+
 @interface LocalPlayViewController ()
 
 @end
@@ -46,7 +49,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        customFont = [UIFont fontWithName:@"Oldstyle HPLHS" size:20];
+        [rollResultLabel setFont:customFont];
+        [roundScoreLabel setFont:customFont];
+        [player1NameLabel setFont:customFont];
+        [player2NameLabel setFont:customFont];
     }
     return self;
 }
