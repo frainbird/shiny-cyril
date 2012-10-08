@@ -18,6 +18,8 @@
 		38ADE189161BC27F00BD369E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17E161BC27F00BD369E /* icon.png */; };
 		38ADE18A161BC27F00BD369E /* pig_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17F161BC27F00BD369E /* pig_icon.png */; };
 		38ADE18B161BC27F00BD369E /* roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE180161BC27F00BD369E /* roll.png */; };
+		DD408B441622476600D89F8A /* NetworkPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD408B421622476600D89F8A /* NetworkPlayViewController.m */; };
+		DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD408B431622476600D89F8A /* NetworkPlayViewController.xib */; };
 		DD45D694160C14860082FAB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D693160C14860082FAB0 /* UIKit.framework */; };
 		DD45D696160C14860082FAB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D695160C14860082FAB0 /* Foundation.framework */; };
 		DD45D698160C14860082FAB0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D697160C14860082FAB0 /* CoreGraphics.framework */; };
@@ -34,9 +36,8 @@
 		DD45D6CF160C190C0082FAB0 /* NamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6CD160C190C0082FAB0 /* NamesViewController.xib */; };
 		DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D1160C192E0082FAB0 /* AboutViewController.m */; };
 		DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */; };
-		DD45D6D8160C1AB50082FAB0 /* NetworkPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D6160C1AB50082FAB0 /* NetworkPlayViewController.m */; };
-		DD45D6D9160C1AB50082FAB0 /* NetworkPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D7160C1AB50082FAB0 /* NetworkPlayViewController.xib */; };
 		DD62B690161EDBC300CB4D62 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD62B68F161EDBC300CB4D62 /* Constants.m */; };
+		DD63BEF6162263C700C7B92F /* heads.png in Resources */ = {isa = PBXBuildFile; fileRef = DD63BEF5162263C700C7B92F /* heads.png */; };
 		DD6A2039161E8F1600EACE2F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DD6A2038161E8F1600EACE2F /* index.html */; };
 		DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */; };
 		DDA636A1161FA29400DB1A50 /* holdSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A0161FA29400DB1A50 /* holdSound.wav */; };
@@ -45,9 +46,9 @@
 		DDA636A8161FB0AF00DB1A50 /* pigSound1.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */; };
 		DDA636AA161FB69700DB1A50 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDA636A9161FB69700DB1A50 /* AVFoundation.framework */; };
 		DDA636AC161FB78200DB1A50 /* theme1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DDA636AB161FB78200DB1A50 /* theme1.ogg */; };
-		DDA636AE161FB9C300DB1A50 /* theme1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DDA636AD161FB9C300DB1A50 /* theme1.mp3 */; };
 		DDA636B1161FC15E00DB1A50 /* sound_mute.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA636AF161FC15D00DB1A50 /* sound_mute.png */; };
 		DDA636B2161FC15E00DB1A50 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA636B0161FC15D00DB1A50 /* sound.png */; };
+		DDA636BC161FCFCB00DB1A50 /* theme1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */; };
 		DDEBE8C2161E6BFD009B0580 /* diceboard.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDEBE8C0161E6BFD009B0580 /* diceboard.wav */; };
 		DDEBE8C3161E6BFD009B0580 /* dicewood.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDEBE8C1161E6BFD009B0580 /* dicewood.wav */; };
 		DDEBE8CA161E7263009B0580 /* pigSound.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DDEBE8C9161E7263009B0580 /* pigSound.ogg */; };
@@ -67,6 +68,9 @@
 		38ADE17E161BC27F00BD369E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = res/icon.png; sourceTree = "<group>"; };
 		38ADE17F161BC27F00BD369E /* pig_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pig_icon.png; sourceTree = "<group>"; };
 		38ADE180161BC27F00BD369E /* roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roll.png; sourceTree = "<group>"; };
+		DD408B411622476600D89F8A /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
+		DD408B421622476600D89F8A /* NetworkPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPlayViewController.m; sourceTree = "<group>"; };
+		DD408B431622476600D89F8A /* NetworkPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkPlayViewController.xib; sourceTree = "<group>"; };
 		DD45D68F160C14860082FAB0 /* Pig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD45D693160C14860082FAB0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DD45D695160C14860082FAB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,11 +95,9 @@
 		DD45D6D0160C192E0082FAB0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		DD45D6D1160C192E0082FAB0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
-		DD45D6D5160C1AB50082FAB0 /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
-		DD45D6D6160C1AB50082FAB0 /* NetworkPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPlayViewController.m; sourceTree = "<group>"; };
-		DD45D6D7160C1AB50082FAB0 /* NetworkPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkPlayViewController.xib; sourceTree = "<group>"; };
 		DD62B68E161EDBC300CB4D62 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DD62B68F161EDBC300CB4D62 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		DD63BEF5162263C700C7B92F /* heads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heads.png; sourceTree = "<group>"; };
 		DD6A2038161E8F1600EACE2F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DDA636A0161FA29400DB1A50 /* holdSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = holdSound.wav; sourceTree = "<group>"; };
@@ -104,9 +106,9 @@
 		DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigSound1.wav; sourceTree = "<group>"; };
 		DDA636A9161FB69700DB1A50 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DDA636AB161FB78200DB1A50 /* theme1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; name = theme1.ogg; path = res/theme1.ogg; sourceTree = "<group>"; };
-		DDA636AD161FB9C300DB1A50 /* theme1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme1.mp3; sourceTree = "<group>"; };
 		DDA636AF161FC15D00DB1A50 /* sound_mute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound_mute.png; sourceTree = "<group>"; };
 		DDA636B0161FC15D00DB1A50 /* sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound.png; sourceTree = "<group>"; };
+		DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme1.mp3; sourceTree = "<group>"; };
 		DDEBE8C0161E6BFD009B0580 /* diceboard.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = diceboard.wav; path = res/diceboard.wav; sourceTree = "<group>"; };
 		DDEBE8C1161E6BFD009B0580 /* dicewood.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = dicewood.wav; path = res/dicewood.wav; sourceTree = "<group>"; };
 		DDEBE8C9161E7263009B0580 /* pigSound.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; name = pigSound.ogg; path = res/pigSound.ogg; sourceTree = "<group>"; };
@@ -241,9 +243,9 @@
 		DD89057816128D770066B82D /* NetworkPlay */ = {
 			isa = PBXGroup;
 			children = (
-				DD45D6D5160C1AB50082FAB0 /* NetworkPlayViewController.h */,
-				DD45D6D6160C1AB50082FAB0 /* NetworkPlayViewController.m */,
-				DD45D6D7160C1AB50082FAB0 /* NetworkPlayViewController.xib */,
+				DD408B411622476600D89F8A /* NetworkPlayViewController.h */,
+				DD408B421622476600D89F8A /* NetworkPlayViewController.m */,
+				DD408B431622476600D89F8A /* NetworkPlayViewController.xib */,
 			);
 			name = NetworkPlay;
 			sourceTree = "<group>";
@@ -251,8 +253,8 @@
 		DDA636B3161FCA1400DB1A50 /* sound */ = {
 			isa = PBXGroup;
 			children = (
-				DDA636AD161FB9C300DB1A50 /* theme1.mp3 */,
 				DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */,
+				DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */,
 				DDA636A5161FAF8000DB1A50 /* pigSound2.wav */,
 				DDA636A3161FA33600DB1A50 /* rollSound2.wav */,
 				DDA636A0161FA29400DB1A50 /* holdSound.wav */,
@@ -263,6 +265,7 @@
 		DDA636B4161FCA1F00DB1A50 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				DD63BEF5162263C700C7B92F /* heads.png */,
 				38ADE176161BC27F00BD369E /* background.png */,
 				38ADE177161BC27F00BD369E /* dice1.png */,
 				38ADE178161BC27F00BD369E /* dice2.png */,
@@ -348,7 +351,6 @@
 				DD45D6CA160C18E30082FAB0 /* LocalPlayViewController.xib in Resources */,
 				DD45D6CF160C190C0082FAB0 /* NamesViewController.xib in Resources */,
 				DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */,
-				DD45D6D9160C1AB50082FAB0 /* NetworkPlayViewController.xib in Resources */,
 				38ADE181161BC27F00BD369E /* background.png in Resources */,
 				38ADE182161BC27F00BD369E /* dice1.png in Resources */,
 				38ADE183161BC27F00BD369E /* dice2.png in Resources */,
@@ -370,9 +372,11 @@
 				DDA636A6161FAF8000DB1A50 /* pigSound2.wav in Resources */,
 				DDA636A8161FB0AF00DB1A50 /* pigSound1.wav in Resources */,
 				DDA636AC161FB78200DB1A50 /* theme1.ogg in Resources */,
-				DDA636AE161FB9C300DB1A50 /* theme1.mp3 in Resources */,
 				DDA636B1161FC15E00DB1A50 /* sound_mute.png in Resources */,
 				DDA636B2161FC15E00DB1A50 /* sound.png in Resources */,
+				DDA636BC161FCFCB00DB1A50 /* theme1.mp3 in Resources */,
+				DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */,
+				DD63BEF6162263C700C7B92F /* heads.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,9 +393,9 @@
 				DD45D6C9160C18E30082FAB0 /* LocalPlayViewController.m in Sources */,
 				DD45D6CE160C190C0082FAB0 /* NamesViewController.m in Sources */,
 				DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */,
-				DD45D6D8160C1AB50082FAB0 /* NetworkPlayViewController.m in Sources */,
 				DDF9E1B4161E999500624E28 /* Reachability.m in Sources */,
 				DD62B690161EDBC300CB4D62 /* Constants.m in Sources */,
+				DD408B441622476600D89F8A /* NetworkPlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

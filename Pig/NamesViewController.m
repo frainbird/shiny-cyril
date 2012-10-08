@@ -12,13 +12,7 @@
 @interface NamesViewController ()
 
 @end
-//local variables
-NSString* P1Name = @"";
-NSString* P2Name = @"";
 
-const int VALID = 0;
-const int BOTH_SAME = 1;
-const int BOTH_BLANK = 2;
 
 @implementation NamesViewController
 
@@ -45,6 +39,7 @@ const int BOTH_BLANK = 2;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self resetNames];
     [self readNames]; //get names from file
     [self setNames];
     [self resetMessage];
@@ -147,6 +142,12 @@ const int BOTH_BLANK = 2;
 
 #pragma mark -
 #pragma mark Init/Exit Methods
+
+-(void)resetNames
+{
+    P1Name = @"";
+    P2Name = @"";
+}
 
 -(void)resetMessage
 {

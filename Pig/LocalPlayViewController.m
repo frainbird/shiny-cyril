@@ -12,44 +12,6 @@
 
 @end
 
-//local variables
-
-//local constants
-const int PLAYER1 = 1;
-const int PLAYER2 = 2;
-const int WINNING_SCORE = 100;
-
-//sound variables
-NSURL           *rollSoundURL;
-SystemSoundID    rollSoundID;
-
-NSURL           *holdSoundURL;
-SystemSoundID    holdSoundID;
-
-NSURL           *pigSound1URL; //sound for one 'pig' die
-SystemSoundID    pigSound1ID;
-
-NSURL           *pigSound2URL; //sound for two 'pig' dice
-SystemSoundID    pigSound2ID;
-
-//player names
-NSString *Player1Name = @"";
-NSString *Player2Name = @"";
-
-//main game variables ints
-int currentPlayer;  
-int die1;           //value of die face
-int die2;           //value of die face
-int roundScore;     
-int player1Total;
-int player2Total;
-int ones; //how many dice with face "1" were rolled (values 0, 1, 2)
-
-NSString *rollResultMessage[3]={@"Roll score:", @"A one! Score nothing", @"Two ones! Lose all points"};
-
-BOOL rollAgain; //controls if the player may roll again this turn
-
-
 @implementation LocalPlayViewController
 
 //buttons
@@ -62,7 +24,14 @@ BOOL rollAgain; //controls if the player may roll again this turn
 @synthesize die2View;
 
 //screen labels
+@synthesize coinImageView;
+@synthesize flipCoinView;
+@synthesize coinMessageLabel;
+
+@synthesize player1View;
+@synthesize player2View;
 @synthesize rollResultLabel;
+@synthesize rollScoreLabel;
 @synthesize roundScoreLabel;
 @synthesize player1ScoreLabel;
 @synthesize player2ScoreLabel;
@@ -104,6 +73,11 @@ BOOL rollAgain; //controls if the player may roll again this turn
 #pragma mark -
 #pragma mark Button Press Methods
 
+-(IBAction)flipButtonPressed:(id)sender
+{
+    [self chooseStartingPlayer];
+}
+
 -(IBAction)rollButtonPressed:(id)sender
 {
     NSLog(@"roll button pressed");
@@ -124,6 +98,7 @@ BOOL rollAgain; //controls if the player may roll again this turn
 -(IBAction)holdButtonPressed:(id)sender
 {
     NSLog(@"hold button pressed");
+    rollAgain = false;
     [self calculateScore:false]; //false: roll press isn't sending the message
     [self showScoreLabels];
     [self evaluateRound];
@@ -216,7 +191,8 @@ BOOL rollAgain; //controls if the player may roll again this turn
     switch (ones)
     {
         case 0:
-            message = [NSString stringWithFormat:@"%@%d",rollResultMessage[0], die1+die2];
+            message = rollResultMessage[0];
+            rollScoreLabel.text = [NSString stringWithFormat:@"%d", die1+die2];
             break;
         case 1:
             message = rollResultMessage[1];
@@ -228,19 +204,21 @@ BOOL rollAgain; //controls if the player may roll again this turn
             message = @"an error occurred";
     }
     rollResultLabel.text = message;
+    
 }
 
 
 -(void)showScoreLabels
 {
-    NSLog(@"showScoreLabels started");
-    //if (!rollAgain)
-    //{
-    //    rollResultLabel.text = [NSString stringWithFormat:@"Player %d to roll", currentPlayer];
-    // }
-    roundScoreLabel.text = [NSString stringWithFormat:@"Round: %d", roundScore];
-    player1ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player1Name, player1Total];
-    player2ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", Player2Name, player2Total];
+    NSLog(@"showScoreLabels started, rollagain is %d",rollAgain);
+    roundScoreLabel.text = [NSString stringWithFormat:@"%d", roundScore];
+    player1ScoreLabel.text = [NSString stringWithFormat:@"%d", player1Total];
+    player2ScoreLabel.text = [NSString stringWithFormat:@"%d", player2Total];
+    
+    if (!rollAgain)
+    {
+        rollScoreLabel.text = @"0";
+    }
 }
 
 -(void)showWinnerMessage:(int)winningPlayer
@@ -258,24 +236,128 @@ BOOL rollAgain; //controls if the player may roll again this turn
     NSLog(@"Please press exit");
 }
 
--(void)highlightCurrentPlayer:(int)player
-{
-    NSLog(@"highlightCurrentPlayer started");
-    if (currentPlayer == PLAYER1)
-    {
-        player1NameLabel.textColor = [UIColor redColor];
-        player2NameLabel.textColor = [UIColor whiteColor];
-    }
-    
-    if (currentPlayer == PLAYER2)
-    {
-        player1NameLabel.textColor = [UIColor whiteColor];
-        player2NameLabel.textColor = [UIColor redColor];
-    }
-}
+
 
 #pragma mark -
 #pragma mark Animation Methods
+
+-(void)showFlipCoinView
+{
+    //animate flip view onto screen
+    [UIView animateWithDuration:1.0
+                          delay: 0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         flipCoinView.transform = CGAffineTransformMakeTranslation(0, -450);
+                     }
+                     completion:^(BOOL finished){
+                         //do nothing
+                     }];  
+    
+}
+
+-(void)hideFlipCoinView
+{
+    [UIView animateWithDuration:1.0
+                          delay: 1.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         flipCoinView.transform = CGAffineTransformMakeTranslation(0, 0);
+                     }
+                     completion:^(BOOL finished){
+                         [self afterHideCoinView];
+                     }];  
+}
+
+-(void)afterHideCoinView
+{
+    rollResultLabel.text = [NSString stringWithFormat:@"%@ to roll", [self getPlayerName:currentPlayer]];
+    [self swapPlayerNames:currentPlayer];
+}
+
+
+-(void)animateCoin:(int)player
+{
+    //1 for heads, 2 for tails
+    float spinSpeed = 0.2;
+    [UIImageView animateWithDuration:spinSpeed
+                               delay: 0.0
+                             options: UIViewAnimationCurveEaseIn
+                          animations:^{
+                              coinImageView.transform = CGAffineTransformMakeScale(0.01, 1.0);
+                              
+                          }
+                          completion:^(BOOL finished){
+                              [UIImageView animateWithDuration:spinSpeed
+                                                         delay: 0.0
+                                                       options: UIViewAnimationCurveEaseOut
+                                                    animations:^{
+                                                        coinImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                                        
+                                                    }
+                                                    completion:^(BOOL finished){
+                                                        [self afterCoinFlipComplete];
+                                                    }];
+                              
+                          }];
+}
+
+-(void)afterCoinFlipComplete
+{
+    coinImageView.image = [UIImage imageNamed:@"heads.png"];
+    [self setCoinMessage];
+    [self hideFlipCoinView];
+    NSLog(@"Coin flip done, current player is %@ (%d)", [self getPlayerName:currentPlayer], currentPlayer);
+}
+
+-(void)setCoinMessage
+{
+    coinMessageLabel.text = [NSString stringWithFormat:@"%@ starts!", [self getPlayerName:currentPlayer]];
+}
+
+
+-(void)swapPlayerNames:(int)player
+{
+    NSLog(@"swap names, currentPlayer is %@ (%d)", [self getPlayerName:player],player);
+    float xpos1;
+    float ypos1;
+    float xpos2;
+    float ypos2; 
+    
+    if (player == PLAYER1) //inverse as we've just swapped players with changePlayer
+    {
+        xpos1 = 0;
+        ypos1 = 0;
+        xpos2 = 0;
+        ypos2 = 0;
+    }
+    else {
+        xpos1 = 0;
+        ypos1 = 60;
+        xpos2 = 0;
+        ypos2 = -60;
+    }
+   
+    [UIView animateWithDuration:0.8
+                          delay: 0.5
+                        options: UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         player1View.transform = CGAffineTransformMakeTranslation(xpos1, ypos1);
+                     }
+                     completion:^(BOOL finished){
+                         //do nothing
+                     }];
+    [UIView animateWithDuration:0.8
+                           delay: 0.5
+                         options: UIViewAnimationCurveEaseInOut
+                      animations:^{
+                          player2View.transform = CGAffineTransformMakeTranslation(xpos2, ypos2);
+                      }
+                      completion:^(BOOL finished){
+                          //do nothing
+                      }]; 
+}
+
 
 #pragma mark -
 #pragma mark Init/Exit Methods
@@ -284,7 +366,6 @@ BOOL rollAgain; //controls if the player may roll again this turn
 - (void)resetGame
 {
     NSLog(@"resetGame started");
-    currentPlayer = 1;
     roundScore = 0;
     player1Total = 0; //start at 0
     player2Total = 0; //start at 0
@@ -316,18 +397,15 @@ BOOL rollAgain; //controls if the player may roll again this turn
 {
     NSLog(@"getStartingPlayer started");
     //check for both player names
+    [self showFlipCoinView];
     [self readNames];
-    [self chooseStartingPlayer];
-
 }
 
 -(void)loadGameElements
 {
     NSLog(@"loadGameElements started");
-    rollResultLabel.text=[NSString stringWithFormat:@"%@ to go first", Player1Name]; //NOTE: just a place-holder message
     [self showScoreLabels];
     [self showPlayerNames];
-    [self highlightCurrentPlayer:currentPlayer];
 }
 
 
@@ -344,10 +422,15 @@ BOOL rollAgain; //controls if the player may roll again this turn
 {
     NSLog(@"chooseStartingPlayer started");
     //show a view to choose who is starting
-    //players can choose either player, or flip a coin to determine    
+    //players can choose either player, or flip a coin to determine
+    
+    currentPlayer = arc4random() % 2 + 1; //randomly choose starting player
+    [self animateCoin:currentPlayer];
 }
 
 
+
+                            
 -(void)rollDice 
 {
     NSLog(@"rollDice started");
@@ -446,6 +529,7 @@ BOOL rollAgain; //controls if the player may roll again this turn
 
 -(void)evaluateRound
 {
+    NSLog(@"evaluateRound started");
     //see if the round resulted in a win, if not change players and keep going
     int winningPlayer = [self checkWinner];
     
@@ -492,6 +576,7 @@ BOOL rollAgain; //controls if the player may roll again this turn
 {
     //switch players
     NSLog(@"changePlayers started, currentplayer was %d", currentPlayer);
+    
     if (currentPlayer == PLAYER1)
     {
         currentPlayer = PLAYER2;
@@ -501,7 +586,23 @@ BOOL rollAgain; //controls if the player may roll again this turn
         currentPlayer = PLAYER1;
     }
     NSLog(@"CP: currentplayer is now %d", currentPlayer);
-    [self highlightCurrentPlayer:currentPlayer];
+    [self swapPlayerNames:currentPlayer];
+}
+
+-(NSString*)getPlayerName:(int)playerNum
+{
+    
+    NSString* playerName;
+    if (playerNum == PLAYER1)
+    {
+        playerName = Player1Name;
+    }
+    else 
+    {
+        playerName = Player2Name;
+    }
+    
+    return playerName;
 }
 
 @end

@@ -17,6 +17,9 @@
     IBOutlet UILabel *messageLabel;
     
     UIButton *acceptButton;
+    
+    NSString* P1Name;
+    NSString* P2Name;
 
     
 }

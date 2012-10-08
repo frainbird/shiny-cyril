@@ -12,10 +12,7 @@
 
 @end
 
-const int LOCAL_VC   = 1;
-const int NETWORK_VC = 2;
-const int NAMES_VC   = 3;
-const int ABOUT_VC   = 4;
+
 BOOL networkUp;
 BOOL musicPlay = true;
 
