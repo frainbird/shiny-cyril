@@ -8,9 +8,6 @@
 
 #import "LocalPlayViewController.h"
 
-
-UIFont *customFont;
-
 @interface LocalPlayViewController ()
 
 @end
@@ -49,11 +46,7 @@ UIFont *customFont;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        customFont = [UIFont fontWithName:@"Oldstyle HPLHS" size:20];
-        [rollResultLabel setFont:customFont];
-        [roundScoreLabel setFont:customFont];
-        [player1NameLabel setFont:customFont];
-        [player2NameLabel setFont:customFont];
+        // Custom initialization
     }
     return self;
 }
@@ -304,7 +297,8 @@ UIFont *customFont;
                           delay: 0.5
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         rollScoreLabel.transform = CGAffineTransformMakeTranslation(0, 40);
+                         rollScoreLabel.transform = CGAffineTransformMakeScale(.221, 0.221);
+                         rollScoreLabel.transform = CGAffineTransformTranslate(rollScoreLabel.transform, 0, 50);
                      }
                      completion:^(BOOL finished){
                          
