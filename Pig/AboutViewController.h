@@ -10,10 +10,14 @@
 
 @interface AboutViewController : UIViewController
 {
-        IBOutlet UIButton *backButton;
+    IBOutlet UIButton *backButton;
+    IBOutlet UIWebView *aboutWebView;
+    BOOL networkUP;
 }
 
 @property UIButton *backButton;
+@property UIWebView *aboutWebView;
+@property BOOL networkUP;
 
 -(IBAction)backButtonPressed:(id)sender;
 

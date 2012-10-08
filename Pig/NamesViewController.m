@@ -8,24 +8,23 @@
 
 #import "NamesViewController.h"
 
+
 @interface NamesViewController ()
 
 @end
-//local variables
-NSString* P1Name = @"";
-NSString* P2Name = @"";
-
-static NSString *P1Key = @"player1Name";
-static NSString *P2Key = @"player2Name";
 
 
 @implementation NamesViewController
 
+
 @synthesize P1NameField;
 @synthesize P2NameField;
+@synthesize messageLabel;
 
 @synthesize acceptButton;
 
+#pragma mark -
+#pragma mark View Controller Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,8 +39,10 @@ static NSString *P2Key = @"player2Name";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self resetNames];
     [self readNames]; //get names from file
     [self setNames];
+    [self resetMessage];
 }
 
 - (void)viewDidUnload
@@ -58,20 +59,66 @@ static NSString *P2Key = @"player2Name";
 
 
 
+#pragma mark -
+#pragma mark Button Press Methods
 
 -(IBAction)acceptButtonPressed:(id)sender
 {
+    int result = [self validateNames];
     
-    [self writeNames];
-    [self exitToMenu];
+    if (result == VALID)
+    {
+        [self getNames];
+        [self writeNames];
+        [self resetMessage];
+        [self exitToMenu];
+    }
+    else if (result == BOTH_SAME)
+    {
+        messageLabel.text = @"Names cannot be the same";
+    }
+    else
+    {
+        messageLabel.text=@"Please enter a player name";
+    }
+    
+}
+
+#pragma mark -
+#pragma mark Name Validation Methods
+
+-(int)validateNames
+{
+    [self getNames];
+    if ([P1Name isEqualToString:P2Name])
+    {
+        if([P1Name isEqualToString:@""])
+        {
+            return BOTH_BLANK;
+        }
+        return BOTH_SAME;
+    }
+    return VALID;
+}
+
+-(void)setNames
+{
+    P1NameField.text = P1Name;
+    P2NameField.text = P2Name;
+}
+
+-(void)getNames
+{
+    P1Name = P1NameField.text;
+    P2Name = P2NameField.text;
 }
 
 -(void)readNames
 {
     //read in names
     
-    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:P1Key];
-    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:P2Key];
+    NSString *name1 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
+    NSString *name2 = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
     
     //store them in variables if something is in them
     if (![name1 length] == 0)
@@ -86,21 +133,25 @@ static NSString *P2Key = @"player2Name";
     
 }
 
--(void)setNames
-{
-    P1NameField.text = P1Name;
-    P2NameField.text = P2Name;
+-(void)writeNames
+{   
+    //write names to file
+    [[NSUserDefaults standardUserDefaults] setObject:P1Name forKey:PLAYER1_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:P2Name forKey:PLAYER2_KEY];
 }
 
--(void)writeNames
+#pragma mark -
+#pragma mark Init/Exit Methods
+
+-(void)resetNames
 {
-    //get values from name fields
-    P1Name = P1NameField.text;
-    P2Name = P2NameField.text;
-    
-    //write names to file
-    [[NSUserDefaults standardUserDefaults] setObject:P1Name forKey:P1Key];
-    [[NSUserDefaults standardUserDefaults] setObject:P2Name forKey:P2Key];
+    P1Name = @"";
+    P2Name = @"";
+}
+
+-(void)resetMessage
+{
+    messageLabel.text = @"Please enter player names";
 }
 
 -(void)exitToMenu

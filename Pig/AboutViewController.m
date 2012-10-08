@@ -12,9 +12,17 @@
 
 @end
 
+
+NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
+
 @implementation AboutViewController
 
+@synthesize aboutWebView;
+@synthesize networkUP;
 @synthesize backButton;
+
+#pragma mark -
+#pragma mark View Controller Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self showNetworkPage];
 }
 
 - (void)viewDidUnload
@@ -41,6 +50,27 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+#pragma mark Other Methods
+
+- (void)showNetworkPage
+{
+    //show external page if network up, otherwise local page
+    NSURL *theURL;
+    if (networkUP)
+    {
+        theURL = [NSURL URLWithString:externalURL];
+    }
+    else 
+    {
+        theURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                pathForResource:@"index" ofType:@"html"]];
+    }
+    
+    NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
+    [aboutWebView loadRequest:theRequest];
 }
 
 -(IBAction)backButtonPressed:(id)sender
