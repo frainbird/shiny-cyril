@@ -91,7 +91,7 @@ UIFont *customFont;
     AudioServicesPlaySystemSound(rollSoundID);
     rollResultLabel.text = rollResultMessage[3];
     [self rollDice];
-    [self showDice];
+    [self showDice]; //do all our animating etc.
     
 }
 
@@ -99,11 +99,9 @@ UIFont *customFont;
 {
     NSLog(@"hold button pressed");
     rollAgain = false;
-    [self calculateScore:false]; //false: roll press isn't sending the message
-    
-    //[self evaluateRound];
+    [self calculateTotalScore]; //calculate player's total score
     [self playSound:holdSoundID];
-    [self animateRoundScore];
+    [self animateRoundScore]; //animate the round score to the player's total
 }
 
 -(IBAction)exitButtonPressed:(id)sender
@@ -177,6 +175,8 @@ UIFont *customFont;
 {
     NSLog(@"showDice started");
     //display dice on screen
+    //the animation just cycles through each dice an equal number of times.
+    //thus the dice at the end are the same as the dice at the start
     
     die1View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die1]];
     die2View.image=[UIImage imageNamed:[NSString stringWithFormat:@"dice%d.png", die2]];
@@ -195,7 +195,7 @@ UIFont *customFont;
     {
         case 0:
             message = rollResultMessage[0];
-            rollScoreLabel.text = [NSString stringWithFormat:@"%d", die1+die2];
+            //[self showRollScore];
             break;
         case 1:
             message = rollResultMessage[1];
@@ -216,17 +216,30 @@ UIFont *customFont;
     
 }
 
--(void)showScoreLabels
+
+
+-(void)updateScoreLabels
 {
-    NSLog(@"showScoreLabels started, rollagain is %d",rollAgain);
+    NSLog(@"updateScoreLabels started");
+    [self showRollScore];
+    [self showRoundScore];
+    [self showTotalScoreLabels];
+}
+
+-(void)showRollScore
+{
+    rollScoreLabel.text = [NSString stringWithFormat:@"%d", rollScore];
+}
+
+-(void)showRoundScore
+{
     roundScoreLabel.text = [NSString stringWithFormat:@"%d", roundScore];
+}
+
+-(void)showTotalScoreLabels
+{
     player1ScoreLabel.text = [NSString stringWithFormat:@"%d", player1Total];
     player2ScoreLabel.text = [NSString stringWithFormat:@"%d", player2Total];
-    
-    if (!rollAgain)
-    {
-        rollScoreLabel.text = @"0";
-    }
 }
 
 -(void)showWinnerMessage:(int)winningPlayer
@@ -267,16 +280,15 @@ UIFont *customFont;
 
     [self performSelector:@selector(animateDiceEnds) withObject:nil afterDelay:1.0];//do this when animation ends
 
-//timer=[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
 }
 
 
 -(void)animateDiceEnds{
-    [self evaluateDice];
-    [self calculateScore:true]; //true: roll press is sending the message
+    [self evaluateDice]; //check how many ones, update roll score accordingly
+    [self calculateRoundScore]; //calculate round score
     [self showRollResult];
+    [self showRollScore];
     [self animateRollScore];
-    //[self showScoreLabels];
     [self playResultSound];
     
     self.view.userInteractionEnabled=YES;
@@ -288,10 +300,6 @@ UIFont *customFont;
 {
     //move roll Score onto Round score, then increment
     
-    if (ones == 1)
-    {
-        rollScoreLabel.text = [NSString stringWithFormat:@"%d",0];
-    }
     [UILabel animateWithDuration:0.5
                           delay: 0.5
                         options: UIViewAnimationCurveEaseOut
@@ -300,13 +308,11 @@ UIFont *customFont;
                      }
                      completion:^(BOOL finished){
                          
-                         //update roll score
-                         if (rollAgain)
-                         {
-                             [self showScoreLabels];
-                         }
-                         rollScoreLabel.text = @"";
-                         //need to reset rollResult label
+                         //update round score
+                         [self showRoundScore];
+                         rollScoreLabel.text = @""; //set rollscore to blank
+                         
+                         //need to reset rollResult label position
                          [UILabel animateWithDuration:0.0
                                                 delay: 0.1
                                               options: UIViewAnimationCurveEaseOut
@@ -329,7 +335,7 @@ UIFont *customFont;
 {
     //more Round Score onto current player's total score, then change players
     NSLog(@"animateRoundScore started, ones is %d",ones);
-    if (ones == 1)
+    if (ones == 1) //animate the round score to the right
     {
         //animate ones away
         [UILabel animateWithDuration:0.8
@@ -339,9 +345,9 @@ UIFont *customFont;
                               roundScoreLabel.transform = CGAffineTransformMakeTranslation(150, 0);
                           }
                           completion:^(BOOL finished){
-                              [self setRoundScoreLabelText:@""];
+                              [self setRoundScoreLabelText:@""]; //clear round score label text
                                                             
-                            //reset position (i'm sure there's an easier way to do this)
+                              //reset position (i'm sure there's an easier way to do this)
                               roundScoreLabel.hidden = YES;
                               [UILabel animateWithDuration:0.0
                                                      delay: 0.5
@@ -350,20 +356,16 @@ UIFont *customFont;
                                                     roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
                                                 }
                                                 completion:^(BOOL finished){
-                                                    [self showScoreLabels];
+                                                    //update total scores
+                                                    [self showTotalScoreLabels];
                                                     [self evaluateRound];
-                                                    roundScoreLabel.hidden = YES;
+                                                    roundScoreLabel.hidden = NO;
                                                 }];
                           }];
         
     }
     else {
-    
-    if (ones == 2)
-    {
-        roundScoreLabel.text = [NSString stringWithFormat:@"%d",roundScore];
-    }
-        
+            
     [UILabel animateWithDuration:0.5
                            delay: 0.1
                          options: UIViewAnimationCurveEaseOut
@@ -379,8 +381,8 @@ UIFont *customFont;
                                                 roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
                                             }
                                             completion:^(BOOL finished){
-                                                //nothing
-                                                [self showScoreLabels];
+                                                //update total scores
+                                                [self showTotalScoreLabels];
                                                 [self evaluateRound];
                                             }];
 
@@ -515,6 +517,7 @@ UIFont *customFont;
 - (void)resetGame
 {
     NSLog(@"resetGame started");
+    rollScore = 0;
     roundScore = 0;
     player1Total = 0; //start at 0
     player2Total = 0; //start at 0
@@ -553,7 +556,7 @@ UIFont *customFont;
 -(void)loadGameElements
 {
     NSLog(@"loadGameElements started");
-    [self showScoreLabels];
+    [self updateScoreLabels];
     [self showPlayerNames];
 }
 
@@ -598,52 +601,100 @@ UIFont *customFont;
     if (die1 == 1 && die2 == 1)
     {
         ones = 2;
+        rollScore = 0;
         rollAgain = false;
     }
     
     else if (die1 == 1 || die2 == 1)
     {
         ones = 1;
+        rollScore = 0;
         rollAgain = false;
     }
 
     else
     {
         ones = 0;
+        rollScore = die1 + die2;
         rollAgain = true;
     }
 }
 
 
--(void)calculateScore:(BOOL)rollPress
+//-(void)calculateScore
+//{
+//    //calculate a player's score depending on what button was pressed and dice that were rolled
+//    NSLog(@"calculateScore, %d");
+//        
+//    if (rollPress) //if roll was pressed
+//    {
+//        switch (ones)
+//        {
+//            case 0:
+//                roundScore = roundScore + rollScore;
+//                break;
+//            
+//            case 1:
+//                roundScore = 0;
+//                break;
+//            
+//            case 2:
+//                roundScore = 0;
+//                [self resetTotalScore:currentPlayer];
+//                break;
+//            
+//            default:
+//                NSLog(@"CS: An error occured");
+//        }
+//    }
+//
+//    if (!rollPress) //if hold was pressed
+//    {      
+//        NSLog(@"CS: currentPlayer is %d", currentPlayer);
+//        //add add roundscore to current player's total
+//        if (currentPlayer == PLAYER1)
+//        {
+//            player1Total = player1Total + roundScore;
+//        }
+//        if (currentPlayer == PLAYER2)
+//        {
+//            player2Total = player2Total + roundScore;
+//        }
+//        //reset roundscore
+//        roundScore = 0;
+//    }
+//        
+//}
+
+-(void)calculateRoundScore
 {
-    //calculate a player's score depending on what button was pressed and dice that were rolled
-    NSLog(@"calculateScore, %d", rollPress);
-        
-    if (rollPress)
-    {
+    NSLog(@"calculateRound score starts");
+    
         switch (ones)
         {
             case 0:
-                roundScore = roundScore + die1 + die2;
+                roundScore = roundScore + rollScore;
                 break;
-            
+                
             case 1:
                 roundScore = 0;
                 break;
-            
+                
             case 2:
                 roundScore = 0;
                 [self resetTotalScore:currentPlayer];
                 break;
-            
+                
             default:
                 NSLog(@"CS: An error occured");
         }
-    }
-    
-    if (!rollPress)
-    {      
+}
+
+
+
+//calculate total
+-(void)calculateTotalScore
+{     
         NSLog(@"CS: currentPlayer is %d", currentPlayer);
         //add add roundscore to current player's total
         if (currentPlayer == PLAYER1)
@@ -656,10 +707,8 @@ UIFont *customFont;
         }
         //reset roundscore
         roundScore = 0;
-    }
-        
-        
 }
+
 
 -(void)resetTotalScore:(int)player
 {
@@ -686,7 +735,6 @@ UIFont *customFont;
     {
         NSLog(@"No winner yet");
         [self changePlayers];
-
     }
     
     else {
