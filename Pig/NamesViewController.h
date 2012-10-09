@@ -8,6 +8,7 @@
 
 #import "Constants.h"
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface NamesViewController : UIViewController
 
@@ -20,6 +21,9 @@
     
     NSString* P1Name;
     NSString* P2Name;
+    
+    NSURL           *clickSoundURL; //sound for click buttons
+    SystemSoundID    clickSoundID;
 }
 
 

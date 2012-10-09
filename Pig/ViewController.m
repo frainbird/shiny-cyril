@@ -50,10 +50,6 @@ BOOL networkUp;
 -(void)viewDidAppear:(BOOL)animated
 {
     [self resetMessage];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY])
-    {
-        [self playMusic];
-    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -67,24 +63,29 @@ BOOL networkUp;
 - (IBAction)localPlayPressed:(id)sender
 {
     NSLog(@"Local play pressed");
+    
+    [self playSound:clickSoundID];
     [self doLocalPlay];
 }
 
 - (IBAction)networkPlayPressed:(id)sender
 {
     NSLog(@"Network play pressed");
+    [self playSound:clickSoundID];
     [self doNetworkPlay];
 }
 
 - (IBAction)namesPressed:(id)sender
 {
-    NSLog(@"Player names play pressed");    
+    NSLog(@"Player names play pressed"); 
+    [self playSound:clickSoundID];
     [self pushView:namesVC :NAMES_VC]; 
 }
 
 - (IBAction)aboutPressed:(id)sender
 {
     NSLog(@"About game pressed");
+    [self playSound:clickSoundID];
     [self pushView:aboutVC :ABOUT_VC]; 
 }
 
@@ -139,6 +140,14 @@ BOOL networkUp;
     }
 }
 
+-(void)initSound
+{
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                           pathForResource:@"buttonClick" 
+                                           ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);       
+}
+
 -(void)playMusic
 {
     [audioPlayer play];
@@ -150,6 +159,15 @@ BOOL networkUp;
     [audioPlayer stop];
 }
 
+-(void)playSound:(SystemSoundID)soundID
+{
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
+}
 
 #pragma mark -
 #pragma mark Menu Methods

@@ -29,6 +29,9 @@
     NSURL           *pigSound2URL; //sound for two 'pig' dice
     SystemSoundID    pigSound2ID;
     
+    NSURL           *clickSoundURL; //sound for click buttons
+    SystemSoundID    clickSoundID;
+    
     //player names
     NSString *Player1Name;
     NSString *Player2Name;

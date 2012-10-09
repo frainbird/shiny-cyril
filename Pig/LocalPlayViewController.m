@@ -99,6 +99,7 @@
 
 -(IBAction)exitButtonPressed:(id)sender
 {
+    [self playSound:clickSoundID];
     [self exitToMenu];
 }
 
@@ -128,6 +129,11 @@
                                               pathForResource:@"pigSound2" 
                                               ofType:@"wav"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) pigSound2URL, &pigSound2ID); 
+    
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                            pathForResource:@"buttonClick" 
+                                            ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);    
 }
 
 -(void)playResultSound

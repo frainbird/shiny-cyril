@@ -35,6 +35,9 @@
     IBOutlet UIButton       *namesButton;
     IBOutlet UIButton       *networkPlayButton;
     IBOutlet UILabel        *namesMessageLabel;
+    
+    NSURL           *clickSoundURL; //sound for one 'pig' die
+    SystemSoundID    clickSoundID;
 
 }
 
