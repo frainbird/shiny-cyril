@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38051CEC1622D63C0019C826 /* OldstyHPLHS.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38051CEA1622D63C0019C826 /* OldstyHPLHS.otf */; };
+		38051CED1622D63C0019C826 /* OldstyItaHPLHS.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38051CEB1622D63C0019C826 /* OldstyItaHPLHS.otf */; };
+		38ADE181161BC27F00BD369E /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE176161BC27F00BD369E /* background.png */; };
+		38ADE182161BC27F00BD369E /* dice1.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE177161BC27F00BD369E /* dice1.png */; };
+		38ADE183161BC27F00BD369E /* dice2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE178161BC27F00BD369E /* dice2.png */; };
+		38ADE184161BC27F00BD369E /* dice3.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE179161BC27F00BD369E /* dice3.png */; };
+		38ADE185161BC27F00BD369E /* dice4.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17A161BC27F00BD369E /* dice4.png */; };
+		38ADE186161BC27F00BD369E /* dice5.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17B161BC27F00BD369E /* dice5.png */; };
+		38ADE187161BC27F00BD369E /* dice6.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17C161BC27F00BD369E /* dice6.png */; };
+		38ADE188161BC27F00BD369E /* hold.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17D161BC27F00BD369E /* hold.png */; };
+		38ADE189161BC27F00BD369E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17E161BC27F00BD369E /* icon.png */; };
+		38ADE18A161BC27F00BD369E /* pig_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17F161BC27F00BD369E /* pig_icon.png */; };
+		38ADE18B161BC27F00BD369E /* roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE180161BC27F00BD369E /* roll.png */; };
+		DD408B441622476600D89F8A /* NetworkPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD408B421622476600D89F8A /* NetworkPlayViewController.m */; };
+		DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD408B431622476600D89F8A /* NetworkPlayViewController.xib */; };
+		DD45D694160C14860082FAB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D693160C14860082FAB0 /* UIKit.framework */; };
+		DD45D696160C14860082FAB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D695160C14860082FAB0 /* Foundation.framework */; };
+		DD45D698160C14860082FAB0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D697160C14860082FAB0 /* CoreGraphics.framework */; };
+		DD45D69E160C14860082FAB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD45D69C160C14860082FAB0 /* InfoPlist.strings */; };
+		DD45D6A0160C14860082FAB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D69F160C14860082FAB0 /* main.m */; };
+		DD45D6A4160C14860082FAB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6A3160C14860082FAB0 /* AppDelegate.m */; };
+		DD45D6A7160C14860082FAB0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6A6160C14860082FAB0 /* ViewController.m */; };
+		DD45D6AA160C14860082FAB0 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6A8160C14860082FAB0 /* ViewController.xib */; };
+		DD45D6B1160C14A50082FAB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D6B0160C14A50082FAB0 /* AudioToolbox.framework */; };
+		DD45D6B3160C14AD0082FAB0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D6B2160C14AD0082FAB0 /* GameKit.framework */; };
+		DD45D6C9160C18E30082FAB0 /* LocalPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6C7160C18E30082FAB0 /* LocalPlayViewController.m */; };
+		DD45D6CA160C18E30082FAB0 /* LocalPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6C8160C18E30082FAB0 /* LocalPlayViewController.xib */; };
+		DD45D6CE160C190C0082FAB0 /* NamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6CC160C190C0082FAB0 /* NamesViewController.m */; };
+		DD45D6CF160C190C0082FAB0 /* NamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6CD160C190C0082FAB0 /* NamesViewController.xib */; };
+		DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D1160C192E0082FAB0 /* AboutViewController.m */; };
+		DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */; };
+		DD62B690161EDBC300CB4D62 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD62B68F161EDBC300CB4D62 /* Constants.m */; };
+		DD6A2039161E8F1600EACE2F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DD6A2038161E8F1600EACE2F /* index.html */; };
+		DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */; };
+		DDA636A1161FA29400DB1A50 /* holdSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A0161FA29400DB1A50 /* holdSound.wav */; };
+		DDA636A4161FA33600DB1A50 /* rollSound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A3161FA33600DB1A50 /* rollSound2.wav */; };
+		DDA636A6161FAF8000DB1A50 /* pigSound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A5161FAF8000DB1A50 /* pigSound2.wav */; };
+		DDA636A8161FB0AF00DB1A50 /* pigSound1.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */; };
+		DDA636AA161FB69700DB1A50 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDA636A9161FB69700DB1A50 /* AVFoundation.framework */; };
+		DDA636B1161FC15E00DB1A50 /* sound_mute.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA636AF161FC15D00DB1A50 /* sound_mute.png */; };
+		DDA636B2161FC15E00DB1A50 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA636B0161FC15D00DB1A50 /* sound.png */; };
+		DDA636BC161FCFCB00DB1A50 /* theme1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */; };
+		DDF9E1B4161E999500624E28 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF9E1B3161E999500624E28 /* Reachability.m */; };
+		DDF9E1B7161EA1AC00624E28 /* rollSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDF9E1B6161EA1AC00624E28 /* rollSound.wav */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		38051CEA1622D63C0019C826 /* OldstyHPLHS.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldstyHPLHS.otf; sourceTree = "<group>"; };
+		38051CEB1622D63C0019C826 /* OldstyItaHPLHS.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldstyItaHPLHS.otf; sourceTree = "<group>"; };
+		38ADE176161BC27F00BD369E /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		38ADE177161BC27F00BD369E /* dice1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice1.png; sourceTree = "<group>"; };
+		38ADE178161BC27F00BD369E /* dice2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice2.png; sourceTree = "<group>"; };
+		38ADE179161BC27F00BD369E /* dice3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice3.png; sourceTree = "<group>"; };
+		38ADE17A161BC27F00BD369E /* dice4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice4.png; sourceTree = "<group>"; };
+		38ADE17B161BC27F00BD369E /* dice5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice5.png; sourceTree = "<group>"; };
+		38ADE17C161BC27F00BD369E /* dice6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice6.png; sourceTree = "<group>"; };
+		38ADE17D161BC27F00BD369E /* hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hold.png; sourceTree = "<group>"; };
+		38ADE17E161BC27F00BD369E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = res/icon.png; sourceTree = "<group>"; };
+		38ADE17F161BC27F00BD369E /* pig_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pig_icon.png; sourceTree = "<group>"; };
+		38ADE180161BC27F00BD369E /* roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roll.png; sourceTree = "<group>"; };
+		DD408B411622476600D89F8A /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
+		DD408B421622476600D89F8A /* NetworkPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPlayViewController.m; sourceTree = "<group>"; };
+		DD408B431622476600D89F8A /* NetworkPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkPlayViewController.xib; sourceTree = "<group>"; };
+		DD45D68F160C14860082FAB0 /* Pig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pig.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD45D693160C14860082FAB0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DD45D695160C14860082FAB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DD45D697160C14860082FAB0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DD45D69B160C14860082FAB0 /* Pig-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pig-Info.plist"; sourceTree = "<group>"; };
+		DD45D69D160C14860082FAB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DD45D69F160C14860082FAB0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DD45D6A1160C14860082FAB0 /* Pig-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pig-Prefix.pch"; sourceTree = "<group>"; };
+		DD45D6A2160C14860082FAB0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DD45D6A3160C14860082FAB0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DD45D6A5160C14860082FAB0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DD45D6A6160C14860082FAB0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DD45D6A9160C14860082FAB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		DD45D6B0160C14A50082FAB0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DD45D6B2160C14AD0082FAB0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		DD45D6C6160C18E30082FAB0 /* LocalPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPlayViewController.h; sourceTree = "<group>"; };
+		DD45D6C7160C18E30082FAB0 /* LocalPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPlayViewController.m; sourceTree = "<group>"; };
+		DD45D6C8160C18E30082FAB0 /* LocalPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalPlayViewController.xib; sourceTree = "<group>"; };
+		DD45D6CB160C190C0082FAB0 /* NamesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamesViewController.h; sourceTree = "<group>"; };
+		DD45D6CC160C190C0082FAB0 /* NamesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamesViewController.m; sourceTree = "<group>"; };
+		DD45D6CD160C190C0082FAB0 /* NamesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NamesViewController.xib; sourceTree = "<group>"; };
+		DD45D6D0160C192E0082FAB0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		DD45D6D1160C192E0082FAB0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		DD62B68E161EDBC300CB4D62 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		DD62B68F161EDBC300CB4D62 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		DD6A2038161E8F1600EACE2F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DDA636A0161FA29400DB1A50 /* holdSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = holdSound.wav; sourceTree = "<group>"; };
+		DDA636A3161FA33600DB1A50 /* rollSound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rollSound2.wav; sourceTree = "<group>"; };
+		DDA636A5161FAF8000DB1A50 /* pigSound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigSound2.wav; sourceTree = "<group>"; };
+		DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigSound1.wav; sourceTree = "<group>"; };
+		DDA636A9161FB69700DB1A50 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DDA636AF161FC15D00DB1A50 /* sound_mute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound_mute.png; sourceTree = "<group>"; };
+		DDA636B0161FC15D00DB1A50 /* sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound.png; sourceTree = "<group>"; };
+		DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme1.mp3; sourceTree = "<group>"; };
+		DDF9E1B2161E999500624E28 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		DDF9E1B3161E999500624E28 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		DDF9E1B6161EA1AC00624E28 /* rollSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = rollSound.wav; path = res/rollSound.wav; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD45D68C160C14860082FAB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA636AA161FB69700DB1A50 /* AVFoundation.framework in Frameworks */,
+				DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */,
+				DD45D6B3160C14AD0082FAB0 /* GameKit.framework in Frameworks */,
+				DD45D6B1160C14A50082FAB0 /* AudioToolbox.framework in Frameworks */,
+				DD45D694160C14860082FAB0 /* UIKit.framework in Frameworks */,
+				DD45D696160C14860082FAB0 /* Foundation.framework in Frameworks */,
+				DD45D698160C14860082FAB0 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		38051CE91622D6280019C826 /* typefaces */ = {
+			isa = PBXGroup;
+			children = (
+				38051CEA1622D63C0019C826 /* OldstyHPLHS.otf */,
+				38051CEB1622D63C0019C826 /* OldstyItaHPLHS.otf */,
+			);
+			name = typefaces;
+			sourceTree = "<group>";
+		};
+		38ADE175161BC27F00BD369E /* res */ = {
+			isa = PBXGroup;
+			children = (
+				38051CE91622D6280019C826 /* typefaces */,
+				DDA636B5161FCA3600DB1A50 /* Unused */,
+				DDA636B4161FCA1F00DB1A50 /* images */,
+				DDA636B3161FCA1400DB1A50 /* sound */,
+				DD6A2038161E8F1600EACE2F /* index.html */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		DD45D684160C14860082FAB0 = {
+			isa = PBXGroup;
+			children = (
+				DDA636A9161FB69700DB1A50 /* AVFoundation.framework */,
+				DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */,
+				DD45D6B2160C14AD0082FAB0 /* GameKit.framework */,
+				DD45D6B0160C14A50082FAB0 /* AudioToolbox.framework */,
+				DD45D699160C14860082FAB0 /* Pig */,
+				DD45D692160C14860082FAB0 /* Frameworks */,
+				DD45D690160C14860082FAB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD45D690160C14860082FAB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D68F160C14860082FAB0 /* Pig.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD45D692160C14860082FAB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D693160C14860082FAB0 /* UIKit.framework */,
+				DD45D695160C14860082FAB0 /* Foundation.framework */,
+				DD45D697160C14860082FAB0 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD45D699160C14860082FAB0 /* Pig */ = {
+			isa = PBXGroup;
+			children = (
+				DD62B68E161EDBC300CB4D62 /* Constants.h */,
+				DD62B68F161EDBC300CB4D62 /* Constants.m */,
+				DDF9E1B2161E999500624E28 /* Reachability.h */,
+				DDF9E1B3161E999500624E28 /* Reachability.m */,
+				38ADE175161BC27F00BD369E /* res */,
+				DD89057516128D5D0066B82D /* About */,
+				DD89057616128D660066B82D /* LocalPlay */,
+				DD89057716128D6F0066B82D /* Names */,
+				DD89057816128D770066B82D /* NetworkPlay */,
+				DD45D6A2160C14860082FAB0 /* AppDelegate.h */,
+				DD45D6A3160C14860082FAB0 /* AppDelegate.m */,
+				DD45D6A5160C14860082FAB0 /* ViewController.h */,
+				DD45D6A6160C14860082FAB0 /* ViewController.m */,
+				DD45D6A8160C14860082FAB0 /* ViewController.xib */,
+				DD45D69A160C14860082FAB0 /* Supporting Files */,
+			);
+			path = Pig;
+			sourceTree = "<group>";
+		};
+		DD45D69A160C14860082FAB0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D69B160C14860082FAB0 /* Pig-Info.plist */,
+				DD45D69C160C14860082FAB0 /* InfoPlist.strings */,
+				DD45D69F160C14860082FAB0 /* main.m */,
+				DD45D6A1160C14860082FAB0 /* Pig-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DD89057516128D5D0066B82D /* About */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D6D0160C192E0082FAB0 /* AboutViewController.h */,
+				DD45D6D1160C192E0082FAB0 /* AboutViewController.m */,
+				DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		DD89057616128D660066B82D /* LocalPlay */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D6C6160C18E30082FAB0 /* LocalPlayViewController.h */,
+				DD45D6C7160C18E30082FAB0 /* LocalPlayViewController.m */,
+				DD45D6C8160C18E30082FAB0 /* LocalPlayViewController.xib */,
+			);
+			name = LocalPlay;
+			sourceTree = "<group>";
+		};
+		DD89057716128D6F0066B82D /* Names */ = {
+			isa = PBXGroup;
+			children = (
+				DD45D6CB160C190C0082FAB0 /* NamesViewController.h */,
+				DD45D6CC160C190C0082FAB0 /* NamesViewController.m */,
+				DD45D6CD160C190C0082FAB0 /* NamesViewController.xib */,
+			);
+			name = Names;
+			sourceTree = "<group>";
+		};
+		DD89057816128D770066B82D /* NetworkPlay */ = {
+			isa = PBXGroup;
+			children = (
+				DD408B411622476600D89F8A /* NetworkPlayViewController.h */,
+				DD408B421622476600D89F8A /* NetworkPlayViewController.m */,
+				DD408B431622476600D89F8A /* NetworkPlayViewController.xib */,
+			);
+			name = NetworkPlay;
+			sourceTree = "<group>";
+		};
+		DDA636B3161FCA1400DB1A50 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */,
+				DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */,
+				DDA636A5161FAF8000DB1A50 /* pigSound2.wav */,
+				DDA636A3161FA33600DB1A50 /* rollSound2.wav */,
+				DDA636A0161FA29400DB1A50 /* holdSound.wav */,
+			);
+			name = sound;
+			sourceTree = "<group>";
+		};
+		DDA636B4161FCA1F00DB1A50 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				38ADE176161BC27F00BD369E /* background.png */,
+				38ADE177161BC27F00BD369E /* dice1.png */,
+				38ADE178161BC27F00BD369E /* dice2.png */,
+				38ADE179161BC27F00BD369E /* dice3.png */,
+				38ADE17A161BC27F00BD369E /* dice4.png */,
+				38ADE17B161BC27F00BD369E /* dice5.png */,
+				38ADE17C161BC27F00BD369E /* dice6.png */,
+				38ADE17D161BC27F00BD369E /* hold.png */,
+				38ADE180161BC27F00BD369E /* roll.png */,
+				38ADE17F161BC27F00BD369E /* pig_icon.png */,
+				DDA636B0161FC15D00DB1A50 /* sound.png */,
+				DDA636AF161FC15D00DB1A50 /* sound_mute.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		DDA636B5161FCA3600DB1A50 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				DDF9E1B6161EA1AC00624E28 /* rollSound.wav */,
+				38ADE17E161BC27F00BD369E /* icon.png */,
+			);
+			name = Unused;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD45D68E160C14860082FAB0 /* Pig */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD45D6AD160C14860082FAB0 /* Build configuration list for PBXNativeTarget "Pig" */;
+			buildPhases = (
+				DD45D68B160C14860082FAB0 /* Sources */,
+				DD45D68C160C14860082FAB0 /* Frameworks */,
+				DD45D68D160C14860082FAB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pig;
+			productName = Pig;
+			productReference = DD45D68F160C14860082FAB0 /* Pig.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD45D686160C14860082FAB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = DD45D689160C14860082FAB0 /* Build configuration list for PBXProject "Pig" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DD45D684160C14860082FAB0;
+			productRefGroup = DD45D690160C14860082FAB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD45D68E160C14860082FAB0 /* Pig */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD45D68D160C14860082FAB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD45D69E160C14860082FAB0 /* InfoPlist.strings in Resources */,
+				DD45D6AA160C14860082FAB0 /* ViewController.xib in Resources */,
+				DD45D6CA160C18E30082FAB0 /* LocalPlayViewController.xib in Resources */,
+				DD45D6CF160C190C0082FAB0 /* NamesViewController.xib in Resources */,
+				DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */,
+				38ADE181161BC27F00BD369E /* background.png in Resources */,
+				38ADE182161BC27F00BD369E /* dice1.png in Resources */,
+				38ADE183161BC27F00BD369E /* dice2.png in Resources */,
+				38ADE184161BC27F00BD369E /* dice3.png in Resources */,
+				38ADE185161BC27F00BD369E /* dice4.png in Resources */,
+				38ADE186161BC27F00BD369E /* dice5.png in Resources */,
+				38ADE187161BC27F00BD369E /* dice6.png in Resources */,
+				38ADE188161BC27F00BD369E /* hold.png in Resources */,
+				38ADE189161BC27F00BD369E /* icon.png in Resources */,
+				38ADE18A161BC27F00BD369E /* pig_icon.png in Resources */,
+				38ADE18B161BC27F00BD369E /* roll.png in Resources */,
+				DD6A2039161E8F1600EACE2F /* index.html in Resources */,
+				DDF9E1B7161EA1AC00624E28 /* rollSound.wav in Resources */,
+				DDA636A1161FA29400DB1A50 /* holdSound.wav in Resources */,
+				DDA636A4161FA33600DB1A50 /* rollSound2.wav in Resources */,
+				DDA636A6161FAF8000DB1A50 /* pigSound2.wav in Resources */,
+				DDA636A8161FB0AF00DB1A50 /* pigSound1.wav in Resources */,
+				DDA636B1161FC15E00DB1A50 /* sound_mute.png in Resources */,
+				DDA636B2161FC15E00DB1A50 /* sound.png in Resources */,
+				DDA636BC161FCFCB00DB1A50 /* theme1.mp3 in Resources */,
+				DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */,
+				38051CEC1622D63C0019C826 /* OldstyHPLHS.otf in Resources */,
+				38051CED1622D63C0019C826 /* OldstyItaHPLHS.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD45D68B160C14860082FAB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD45D6A0160C14860082FAB0 /* main.m in Sources */,
+				DD45D6A4160C14860082FAB0 /* AppDelegate.m in Sources */,
+				DD45D6A7160C14860082FAB0 /* ViewController.m in Sources */,
+				DD45D6C9160C18E30082FAB0 /* LocalPlayViewController.m in Sources */,
+				DD45D6CE160C190C0082FAB0 /* NamesViewController.m in Sources */,
+				DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */,
+				DDF9E1B4161E999500624E28 /* Reachability.m in Sources */,
+				DD62B690161EDBC300CB4D62 /* Constants.m in Sources */,
+				DD408B441622476600D89F8A /* NetworkPlayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DD45D69C160C14860082FAB0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD45D69D160C14860082FAB0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DD45D6A8160C14860082FAB0 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD45D6A9160C14860082FAB0 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD45D6AB160C14860082FAB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					armv6,
+				);
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DD45D6AC160C14860082FAB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					armv6,
+				);
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DD45D6AE160C14860082FAB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pig/Pig-Prefix.pch";
+				INFOPLIST_FILE = "Pig/Pig-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DD45D6AF160C14860082FAB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pig/Pig-Prefix.pch";
+				INFOPLIST_FILE = "Pig/Pig-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD45D689160C14860082FAB0 /* Build configuration list for PBXProject "Pig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD45D6AB160C14860082FAB0 /* Debug */,
+				DD45D6AC160C14860082FAB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD45D6AD160C14860082FAB0 /* Build configuration list for PBXNativeTarget "Pig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD45D6AE160C14860082FAB0 /* Debug */,
+				DD45D6AF160C14860082FAB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD45D686160C14860082FAB0 /* Project object */;
+}
