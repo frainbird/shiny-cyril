@@ -305,7 +305,7 @@
 -(void)animateRollScore
 {
     //move roll Score onto Round score, then increment
-    
+    rollScoreLabel.hidden=NO;
     [UILabel animateWithDuration:0.5
                           delay: 0.5
                         options: UIViewAnimationCurveEaseOut
@@ -324,6 +324,7 @@
                                               options: UIViewAnimationCurveEaseOut
                                            animations:^{
                                                rollScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
+                                               rollScoreLabel.hidden=YES;
                                            }
                                            completion:^(BOOL finished){
                                                //nothing
@@ -545,6 +546,7 @@
 - (void)playGame
 {
     NSLog(@"Play game started");
+    rollScoreLabel.hidden=YES;
     [self getStartingPlayer];
     [self resetGame];
     [self loadGameElements];
