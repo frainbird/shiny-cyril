@@ -20,8 +20,6 @@
     
     NSString* P1Name;
     NSString* P2Name;
-
-    
 }
 
 

@@ -65,7 +65,7 @@
 		38ADE17B161BC27F00BD369E /* dice5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice5.png; sourceTree = "<group>"; };
 		38ADE17C161BC27F00BD369E /* dice6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dice6.png; sourceTree = "<group>"; };
 		38ADE17D161BC27F00BD369E /* hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hold.png; sourceTree = "<group>"; };
-		38ADE17E161BC27F00BD369E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = res/icon.png; sourceTree = "<group>"; };
+		38ADE17E161BC27F00BD369E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		38ADE17F161BC27F00BD369E /* pig_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pig_icon.png; sourceTree = "<group>"; };
 		38ADE180161BC27F00BD369E /* roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roll.png; sourceTree = "<group>"; };
 		DD408B411622476600D89F8A /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
@@ -265,6 +265,7 @@
 		DDA636B4161FCA1F00DB1A50 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				38ADE17E161BC27F00BD369E /* icon.png */,
 				DD63BEF5162263C700C7B92F /* heads.png */,
 				38ADE176161BC27F00BD369E /* background.png */,
 				38ADE177161BC27F00BD369E /* dice1.png */,
@@ -290,7 +291,6 @@
 				DDEBE8C9161E7263009B0580 /* pigSound.ogg */,
 				DDEBE8C0161E6BFD009B0580 /* diceboard.wav */,
 				DDEBE8C1161E6BFD009B0580 /* dicewood.wav */,
-				38ADE17E161BC27F00BD369E /* icon.png */,
 			);
 			name = Unused;
 			path = ..;

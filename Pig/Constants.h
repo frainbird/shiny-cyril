@@ -8,6 +8,7 @@
 
 NSString *const PLAYER1_KEY;
 NSString *const PLAYER2_KEY;
+NSString *const SOUND_ON_OFF_KEY;
 
 //used in net/local play
 NSString *const rollResultMessage[4];

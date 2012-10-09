@@ -150,7 +150,10 @@
 
 -(void)playSound:(SystemSoundID)soundID
 {
-    AudioServicesPlaySystemSound(soundID);
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY])
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
 }
 
 #pragma mark -
