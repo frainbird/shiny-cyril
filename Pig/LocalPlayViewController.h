@@ -52,7 +52,8 @@
     //screen elements
     IBOutlet UIImageView *coinImageView;
     IBOutlet UIView *flipCoinView;
-    IBOutlet UILabel *coinMessageLabel;
+    IBOutlet UILabel *startingPlayerMessageLabel;
+    IBOutlet UILabel *startingPlayerNameLabel;
     
     IBOutlet UIButton *exitButton;
     IBOutlet UIButton *holdButton;
@@ -71,11 +72,14 @@
     IBOutlet UILabel *player1NameLabel;
     IBOutlet UILabel *player2NameLabel;
     
+    IBOutlet UIView *winningView;
+    
 }
 
 @property UIImageView *coinImageView;
 @property UIView     *flipCoinView;
-@property UILabel    *coinMessageLabel;
+@property UILabel    *startingPlayerMessageLabel;
+@property UILabel    *startingPlayerNameLabel;
 
 @property UIButton *exitButton;
 @property UIButton *holdButton;
@@ -94,10 +98,11 @@
 @property UILabel *player1NameLabel;
 @property UILabel *player2NameLabel;
 
+@property UIView *winningView;
+
 
 -(void)playGame;
 
--(IBAction)flipButtonPressed:(id)sender;
 -(IBAction)holdButtonPressed:(id)sender;
 -(IBAction)rollButtonPressed:(id)sender;
 -(IBAction)exitButtonPressed:(id)sender;

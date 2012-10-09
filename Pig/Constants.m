@@ -11,6 +11,7 @@ NSString *const PLAYER2_KEY = @"player2key";
 NSString *const SOUND_ON_OFF_KEY = @"soundOnOffKey";
 
 //used in net/local play
+NSString *const startingReasonMessage[5]={@"Due to circumstances beyond our control",@"Based on device's CPU temperature",@"According to your hand breadth dimension",@"As Apple have pre-determined your preferences",@"Based on facial attractiveness score"};
 NSString *const rollResultMessage[4]={@"Score points!", @"A one! Score nothing", @"Two ones! Lose all points", @"Rolling..."};
 
 const int PLAYER1 = 1;

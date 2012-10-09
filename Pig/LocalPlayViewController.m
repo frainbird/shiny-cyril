@@ -7,6 +7,7 @@
 //
 
 #import "LocalPlayViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LocalPlayViewController ()
 
@@ -26,7 +27,8 @@
 //screen labels
 @synthesize coinImageView;
 @synthesize flipCoinView;
-@synthesize coinMessageLabel;
+@synthesize startingPlayerMessageLabel;
+@synthesize startingPlayerNameLabel;
 
 @synthesize player1View;
 @synthesize player2View;
@@ -37,6 +39,8 @@
 @synthesize player2ScoreLabel;
 @synthesize player1NameLabel;
 @synthesize player2NameLabel;
+
+@synthesize winningView;
 
 
 #pragma mark -
@@ -73,10 +77,6 @@
 #pragma mark -
 #pragma mark Button Press Methods
 
--(IBAction)flipButtonPressed:(id)sender
-{
-    [self chooseStartingPlayer];
-}
 
 -(IBAction)rollButtonPressed:(id)sender
 {
@@ -250,6 +250,7 @@
 
 -(void)showWinnerMessage:(int)winningPlayer
 {
+    [self animateWinningMessage:winningPlayer];
     NSLog(@"Player %d wins", winningPlayer);
     if (winningPlayer == PLAYER1)
     {
@@ -307,7 +308,7 @@
     //move roll Score onto Round score, then increment
     rollScoreLabel.hidden=NO;
     [UILabel animateWithDuration:0.5
-                          delay: 0.5
+                          delay: 0.8
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
                          rollScoreLabel.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(.221, 0.221), CGAffineTransformTranslate(rollScoreLabel.transform, 0, 80));
@@ -399,7 +400,67 @@
 }
 
 
--(void)showFlipCoinView
+-(void)animateWinningMessage:(int)winningPlayer
+{
+    //animate flip view onto screen
+    [UIView animateWithDuration:1.0
+                          delay: 0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         winningView.transform = CGAffineTransformMakeTranslation(0, 450);
+                     }
+                     completion:^(BOOL finished){
+                         //do nothing
+                     }];
+    UIView *pNameView;
+    float ypos = 150;
+    
+    if (winningPlayer == PLAYER1)
+    {
+        pNameView = player1View;
+        ypos = ypos + 60;
+    }
+        
+    if (winningPlayer == PLAYER2)
+    {
+        pNameView = player2View;
+        ypos = ypos;
+    }
+    
+    pNameView.layer.zPosition = 1; //should reset these in the initialisation
+    
+    //animate winning player's label
+    [UILabel animateWithDuration:1.0
+                          delay: 0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         pNameView.transform = CGAffineTransformMakeTranslation(0, ypos);
+                     }
+                     completion:^(BOOL finished){
+                         //do nothing
+                     }];  
+    
+    
+    //animate exit button upwards a bit
+    exitButton.layer.zPosition = 2; //should reset these in the initialisation
+    rollScoreLabel.hidden=YES;
+    
+    [UIButton animateWithDuration:1.0
+                          delay: 0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         exitButton.transform = CGAffineTransformMakeTranslation(0, -100);
+                     }
+                     completion:^(BOOL finished){
+                         //enable exit buttons
+                         //exitButton.userInteractionEnabled = TRUE;
+                         
+                     }];  
+    
+    
+}
+
+-(void)showChooseStarterView
 {
     //animate flip view onto screen
     [UIView animateWithDuration:1.0
@@ -410,68 +471,80 @@
                      }
                      completion:^(BOOL finished){
                          //do nothing
+                         [self chooseStartingPlayer];
+                         [self showChooseStarterText];
                      }];  
     
 }
 
--(void)hideFlipCoinView
+-(void)showChooseStarterText
+{
+    
+    startingPlayerMessageLabel.text = [NSString stringWithFormat:@"%@:", startingReasonMessage[[self chooseMessageText]]];
+    startingPlayerNameLabel.text = [NSString stringWithFormat:@"%@ starts!", [self getPlayerName:currentPlayer]];
+    
+    startingPlayerMessageLabel.hidden = FALSE;
+    
+    [self showStartingPlayerNameLabel];
+    
+    NSLog(@"Choose player done, player is %@ (%d)", [self getPlayerName:currentPlayer], currentPlayer);
+}
+
+-(void)showStartingPlayerNameLabel
+{
+    [UILabel animateWithDuration:0.0
+                           delay: 0.0
+                         options: UIViewAnimationCurveEaseOut
+                      animations:^{
+                          startingPlayerNameLabel.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                      }
+                      completion:^(BOOL finished){
+                          
+                          startingPlayerNameLabel.hidden = FALSE;
+                          
+                          [UILabel animateWithDuration:0.5
+                                                 delay: 2.0
+                                               options: UIViewAnimationCurveEaseOut
+                                            animations:^{
+                                                startingPlayerNameLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                            }
+                                            completion:^(BOOL finished){
+                                                [self hideChooseStarterView];
+                                            }];
+                           }];
+}
+
+-(void)chooseStartingPlayer
+{
+    NSLog(@"chooseStartingPlayer started");    
+    currentPlayer = arc4random() % 2 + 1; //randomly choose starting player
+}
+
+-(int)chooseMessageText
+{
+    int messageIndex = arc4random() % 5;
+    return messageIndex;
+}
+
+-(void)hideChooseStarterView
 {
     [UIView animateWithDuration:1.0
-                          delay: 1.0
+                          delay: 2.0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
                          flipCoinView.transform = CGAffineTransformMakeTranslation(0, 0);
                      }
                      completion:^(BOOL finished){
-                         [self afterHideCoinView];
+                         [self afterHideChoose];
                      }];  
 }
 
--(void)afterHideCoinView
+-(void)afterHideChoose
 {
     rollResultLabel.text = [NSString stringWithFormat:@"%@ to roll", [self getPlayerName:currentPlayer]];
     [self swapPlayerNames:currentPlayer];
 }
 
-
--(void)animateCoin:(int)player
-{
-    //1 for heads, 2 for tails
-    float spinSpeed = 0.2;
-    [UIImageView animateWithDuration:spinSpeed
-                               delay: 0.0
-                             options: UIViewAnimationCurveEaseIn
-                          animations:^{
-                              coinImageView.transform = CGAffineTransformMakeScale(0.01, 1.0);
-                              
-                          }
-                          completion:^(BOOL finished){
-                              [UIImageView animateWithDuration:spinSpeed
-                                                         delay: 0.0
-                                                       options: UIViewAnimationCurveEaseOut
-                                                    animations:^{
-                                                        coinImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-                                                        
-                                                    }
-                                                    completion:^(BOOL finished){
-                                                        [self afterCoinFlipComplete];
-                                                    }];
-                              
-                          }];
-}
-
--(void)afterCoinFlipComplete
-{
-    coinImageView.image = [UIImage imageNamed:@"heads.png"];
-    [self setCoinMessage];
-    [self hideFlipCoinView];
-    NSLog(@"Coin flip done, current player is %@ (%d)", [self getPlayerName:currentPlayer], currentPlayer);
-}
-
--(void)setCoinMessage
-{
-    coinMessageLabel.text = [NSString stringWithFormat:@"%@ starts!", [self getPlayerName:currentPlayer]];
-}
 
 
 -(void)swapPlayerNames:(int)player
@@ -557,7 +630,7 @@
 {
     NSLog(@"getStartingPlayer started");
     //check for both player names
-    [self showFlipCoinView];
+    [self showChooseStarterView];
     [self readNames];
 }
 
@@ -578,15 +651,7 @@
     Player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
 }
 
--(void)chooseStartingPlayer
-{
-    NSLog(@"chooseStartingPlayer started");
-    //show a view to choose who is starting
-    //players can choose either player, or flip a coin to determine
-    
-    currentPlayer = arc4random() % 2 + 1; //randomly choose starting player
-    [self animateCoin:currentPlayer];
-}
+
 
 
 

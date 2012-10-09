@@ -11,6 +11,7 @@ NSString *const PLAYER2_KEY;
 NSString *const SOUND_ON_OFF_KEY;
 
 //used in net/local play
+NSString *const startingReasonMessage[5];
 NSString *const rollResultMessage[4];
 
 const int PLAYER1;
