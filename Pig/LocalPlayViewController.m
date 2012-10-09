@@ -81,7 +81,7 @@
 -(IBAction)rollButtonPressed:(id)sender
 {
     NSLog(@"roll button pressed");
-    AudioServicesPlaySystemSound(rollSoundID);
+    [self playSound:rollSoundID];
     rollResultLabel.text = rollResultMessage[3];
     [self rollDice];
     [self showDice]; //do all our animating etc.
@@ -133,24 +133,28 @@
 -(void)playResultSound
 {
     NSLog(@"playResultSound, ones is: %d",ones);
-    if (ones == 0)
-    {
-        //AudioServicesPlaySystemSound(pigSound1ID);
-    }
-    
-    if (ones == 1)
-    {
-        AudioServicesPlaySystemSound(pigSound1ID);
-    }
-    if (ones == 2)
-    {
-        AudioServicesPlaySystemSound(pigSound2ID);
-    }
+
+
+        if (ones == 0)
+        {
+            //AudioServicesPlaySystemSound(pigSound1ID);
+        }
+        
+        if (ones == 1)
+        {
+            [self playSound:pigSound1ID];
+        }
+        if (ones == 2)
+        {
+            [self playSound:pigSound2ID];
+        }
 }
 
 -(void)playSound:(SystemSoundID)soundID
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY])
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
     {
         AudioServicesPlaySystemSound(soundID);
     }

@@ -1,4 +1,4 @@
-//
+  //
 //  ViewController.m
 //  Pig
 //
@@ -14,7 +14,6 @@
 
 
 BOOL networkUp;
-BOOL musicPlay = true;
 
 
 //AVAudioPlayer           *audioPlayer;
@@ -33,6 +32,7 @@ BOOL musicPlay = true;
 
 - (void)viewDidLoad
 {
+    musicPlay = true;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     namesMessageLabel.text = @"";
@@ -50,6 +50,10 @@ BOOL musicPlay = true;
 -(void)viewDidAppear:(BOOL)animated
 {
     [self resetMessage];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY])
+    {
+        [self playMusic];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -92,6 +96,7 @@ BOOL musicPlay = true;
         [self stopMusic];
          musicPlay = false;
         
+        
         //swap images         
         UIImage * btnImage1 = [UIImage imageNamed:@"sound_mute.png"];
         [muteButton setImage:btnImage1 forState:UIControlStateNormal];
@@ -105,8 +110,10 @@ BOOL musicPlay = true;
         //swap images
         [muteButton setImage:btnImage2 forState:UIControlStateNormal];
         musicPlay = true;
-    }
 
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:musicPlay forKey:SOUND_ON_OFF_KEY];
+    NSLog(@"Music is %d",[[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY]);
         
 }
 
@@ -135,12 +142,14 @@ BOOL musicPlay = true;
 -(void)playMusic
 {
     [audioPlayer play];
+
 }
 
 -(void)stopMusic
 {
     [audioPlayer stop];
 }
+
 
 #pragma mark -
 #pragma mark Menu Methods
@@ -156,6 +165,7 @@ BOOL musicPlay = true;
     if ([[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY] length] != 0 && 
         [[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY] length] != 0)
     {
+        [self stopMusic];
         [self resetMessage];
         [self pushView:localPlayVC :LOCAL_VC];
     }

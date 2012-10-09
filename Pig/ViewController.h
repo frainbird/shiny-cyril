@@ -20,7 +20,7 @@
 
 @interface ViewController : UIViewController<UIAccelerometerDelegate,GKPeerPickerControllerDelegate,GKSessionDelegate,AVAudioPlayerDelegate>
 {
-    
+    BOOL musicPlay;
     AboutViewController     *aboutVC;
     LocalPlayViewController *localPlayVC;
     NamesViewController     *namesVC;
