@@ -12,6 +12,36 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "NamesViewController.h"
 
+typedef enum {
+	NETWORK_ACK,					// no packet
+	NETWORK_COINTOSS,				// decide who is going to be the server
+	NETWORK_ROLL_EVENT,				// send roll event
+	NETWORK_CHANGE_PLAYER_EVENT,	// send change of player event
+} packetCodes;
+
+typedef enum {
+    CHANGE_PLAYER_HOLD,
+    CHANGE_PLAYER_SINGLE,
+    CHANGE_PLAYER_DOUBLE
+} changeCodes;
+
+typedef enum {
+    PLAYER_SERVER,
+    PLAYER_CLIENT
+} playerTypes;
+
+typedef struct {
+    int serverScore;
+    int clientScore;
+    
+    playerTypes currentPlayer;
+    int roundScore;
+} gameState;
+
+typedef struct {
+    int dice1;
+    int dice2;
+} roll;
 
 @interface NetworkPlayViewController : UIViewController
 {
