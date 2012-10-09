@@ -69,6 +69,9 @@ NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
                                 pathForResource:@"index" ofType:@"html"]];
     }
     
+    //theURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+    //                                pathForResource:@"index" ofType:@"html"]];
+    
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
     [aboutWebView loadRequest:theRequest];
 }

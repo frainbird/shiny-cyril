@@ -297,8 +297,7 @@
                           delay: 0.5
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         rollScoreLabel.transform = CGAffineTransformMakeScale(.221, 0.221);
-                         rollScoreLabel.transform = CGAffineTransformTranslate(rollScoreLabel.transform, 0, 50);
+                         rollScoreLabel.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(.221, 0.221), CGAffineTransformTranslate(rollScoreLabel.transform, 0, 80));
                      }
                      completion:^(BOOL finished){
                          
