@@ -37,6 +37,7 @@ NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self initSound];
     [self showNetworkPage];
 }
 
@@ -54,6 +55,24 @@ NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
 
 #pragma mark -
 #pragma mark Other Methods
+
+-(void)initSound
+{
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                            pathForResource:@"buttonClick" 
+                                            ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);       
+}
+
+-(void)playSound:(SystemSoundID)soundID
+{
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
+}
 
 - (void)showNetworkPage
 {
@@ -78,6 +97,7 @@ NSString *externalURL = @"http://lawson.cis.utas.edu.au/~mjvalk/pig/index.html";
 
 -(IBAction)backButtonPressed:(id)sender
 {
+    [self playSound:clickSoundID];
     [self exitToMenu];
 }
 

@@ -1,4 +1,4 @@
-//
+  //
 //  ViewController.m
 //  Pig
 //
@@ -14,7 +14,6 @@
 
 
 BOOL networkUp;
-BOOL musicPlay = true;
 
 
 //AVAudioPlayer           *audioPlayer;
@@ -33,6 +32,7 @@ BOOL musicPlay = true;
 
 - (void)viewDidLoad
 {
+    musicPlay = true;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     namesMessageLabel.text = @"";
@@ -63,24 +63,29 @@ BOOL musicPlay = true;
 - (IBAction)localPlayPressed:(id)sender
 {
     NSLog(@"Local play pressed");
+    
+    [self playSound:clickSoundID];
     [self doLocalPlay];
 }
 
 - (IBAction)networkPlayPressed:(id)sender
 {
     NSLog(@"Network play pressed");
+    [self playSound:clickSoundID];
     [self doNetworkPlay];
 }
 
 - (IBAction)namesPressed:(id)sender
 {
-    NSLog(@"Player names play pressed");    
+    NSLog(@"Player names play pressed"); 
+    [self playSound:clickSoundID];
     [self pushView:namesVC :NAMES_VC]; 
 }
 
 - (IBAction)aboutPressed:(id)sender
 {
     NSLog(@"About game pressed");
+    [self playSound:clickSoundID];
     [self pushView:aboutVC :ABOUT_VC]; 
 }
 
@@ -91,6 +96,7 @@ BOOL musicPlay = true;
     {
         [self stopMusic];
          musicPlay = false;
+        
         
         //swap images         
         UIImage * btnImage1 = [UIImage imageNamed:@"sound_mute.png"];
@@ -105,8 +111,10 @@ BOOL musicPlay = true;
         //swap images
         [muteButton setImage:btnImage2 forState:UIControlStateNormal];
         musicPlay = true;
-    }
 
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:musicPlay forKey:SOUND_ON_OFF_KEY];
+    NSLog(@"Music is %d",[[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY]);
         
 }
 
@@ -132,14 +140,33 @@ BOOL musicPlay = true;
     }
 }
 
+-(void)initSound
+{
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                           pathForResource:@"buttonClick" 
+                                           ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);       
+}
+
 -(void)playMusic
 {
     [audioPlayer play];
+
 }
 
 -(void)stopMusic
 {
     [audioPlayer stop];
+}
+
+-(void)playSound:(SystemSoundID)soundID
+{
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
 }
 
 #pragma mark -
@@ -156,6 +183,7 @@ BOOL musicPlay = true;
     if ([[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY] length] != 0 && 
         [[[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY] length] != 0)
     {
+        [self stopMusic];
         [self resetMessage];
         [self pushView:localPlayVC :LOCAL_VC];
     }

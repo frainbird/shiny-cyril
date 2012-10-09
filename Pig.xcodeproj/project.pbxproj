@@ -38,6 +38,7 @@
 		DD45D6CF160C190C0082FAB0 /* NamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6CD160C190C0082FAB0 /* NamesViewController.xib */; };
 		DD45D6D3160C192E0082FAB0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD45D6D1160C192E0082FAB0 /* AboutViewController.m */; };
 		DD45D6D4160C192E0082FAB0 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */; };
+		DD5919891623FEC600A900ED /* buttonClick.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD5919881623FEC600A900ED /* buttonClick.wav */; };
 		DD62B690161EDBC300CB4D62 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD62B68F161EDBC300CB4D62 /* Constants.m */; };
 		DD6A2039161E8F1600EACE2F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DD6A2038161E8F1600EACE2F /* index.html */; };
 		DD6A2044161E94EC00EACE2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A2043161E94EC00EACE2F /* SystemConfiguration.framework */; };
@@ -94,6 +95,7 @@
 		DD45D6D0160C192E0082FAB0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		DD45D6D1160C192E0082FAB0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		DD45D6D2160C192E0082FAB0 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		DD5919881623FEC600A900ED /* buttonClick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonClick.wav; sourceTree = "<group>"; };
 		DD62B68E161EDBC300CB4D62 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DD62B68F161EDBC300CB4D62 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		DD6A2038161E8F1600EACE2F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		DDA636B3161FCA1400DB1A50 /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				DD5919881623FEC600A900ED /* buttonClick.wav */,
 				DDA636A7161FB0AF00DB1A50 /* pigSound1.wav */,
 				DDA636BB161FCFCB00DB1A50 /* theme1.mp3 */,
 				DDA636A5161FAF8000DB1A50 /* pigSound2.wav */,
@@ -373,6 +376,7 @@
 				DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */,
 				38051CEC1622D63C0019C826 /* OldstyHPLHS.otf in Resources */,
 				38051CED1622D63C0019C826 /* OldstyItaHPLHS.otf in Resources */,
+				DD5919891623FEC600A900ED /* buttonClick.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

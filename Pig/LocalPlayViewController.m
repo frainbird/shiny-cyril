@@ -81,7 +81,7 @@
 -(IBAction)rollButtonPressed:(id)sender
 {
     NSLog(@"roll button pressed");
-    AudioServicesPlaySystemSound(rollSoundID);
+    [self playSound:rollSoundID];
     rollResultLabel.text = rollResultMessage[3];
     [self rollDice];
     [self showDice]; //do all our animating etc.
@@ -99,6 +99,7 @@
 
 -(IBAction)exitButtonPressed:(id)sender
 {
+    [self playSound:clickSoundID];
     [self exitToMenu];
 }
 
@@ -128,29 +129,41 @@
                                               pathForResource:@"pigSound2" 
                                               ofType:@"wav"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) pigSound2URL, &pigSound2ID); 
+    
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                            pathForResource:@"buttonClick" 
+                                            ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);    
 }
 
 -(void)playResultSound
 {
     NSLog(@"playResultSound, ones is: %d",ones);
-    if (ones == 0)
-    {
-        //AudioServicesPlaySystemSound(pigSound1ID);
-    }
-    
-    if (ones == 1)
-    {
-        AudioServicesPlaySystemSound(pigSound1ID);
-    }
-    if (ones == 2)
-    {
-        AudioServicesPlaySystemSound(pigSound2ID);
-    }
+
+
+        if (ones == 0)
+        {
+            //AudioServicesPlaySystemSound(pigSound1ID);
+        }
+        
+        if (ones == 1)
+        {
+            [self playSound:pigSound1ID];
+        }
+        if (ones == 2)
+        {
+            [self playSound:pigSound2ID];
+        }
 }
 
 -(void)playSound:(SystemSoundID)soundID
 {
-    AudioServicesPlaySystemSound(soundID);
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
 }
 
 #pragma mark -

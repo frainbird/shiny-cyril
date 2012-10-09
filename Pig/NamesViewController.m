@@ -43,6 +43,7 @@
     [self readNames]; //get names from file
     [self setNames];
     [self resetMessage];
+    [self initSound];
 }
 
 - (void)viewDidUnload
@@ -64,8 +65,8 @@
 
 -(IBAction)acceptButtonPressed:(id)sender
 {
+    [self playSound:clickSoundID];
     int result = [self validateNames];
-    
     if (result == VALID)
     {
         [self getNames];
@@ -142,6 +143,25 @@
 
 #pragma mark -
 #pragma mark Init/Exit Methods
+
+-(void)initSound
+{
+    clickSoundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                            pathForResource:@"buttonClick" 
+                                            ofType:@"wav"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) clickSoundURL, &clickSoundID);       
+}
+
+-(void)playSound:(SystemSoundID)soundID
+{
+    bool sound = [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ON_OFF_KEY];
+    NSLog(@"sound is %d", sound);
+    if (sound)
+    {
+        AudioServicesPlaySystemSound(soundID);
+    }
+}
+
 
 -(void)resetNames
 {

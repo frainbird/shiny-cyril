@@ -20,7 +20,7 @@
 
 @interface ViewController : UIViewController<UIAccelerometerDelegate,GKPeerPickerControllerDelegate,GKSessionDelegate,AVAudioPlayerDelegate>
 {
-    
+    BOOL musicPlay;
     AboutViewController     *aboutVC;
     LocalPlayViewController *localPlayVC;
     NamesViewController     *namesVC;
@@ -35,6 +35,9 @@
     IBOutlet UIButton       *namesButton;
     IBOutlet UIButton       *networkPlayButton;
     IBOutlet UILabel        *namesMessageLabel;
+    
+    NSURL           *clickSoundURL; //sound for one 'pig' die
+    SystemSoundID    clickSoundID;
 
 }
 
