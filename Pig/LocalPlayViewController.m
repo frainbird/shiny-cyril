@@ -81,20 +81,15 @@
 -(IBAction)rollButtonPressed:(id)sender
 {
     NSLog(@"roll button pressed");
-    [self playSound:rollSoundID];
-    rollResultLabel.text = rollResultMessage[3];
-    [self rollDice];
-    [self showDice]; //do all our animating etc.
+    if (!isRolling)
+    {
+        isRolling=YES;
+        [self playSound:rollSoundID];
+        rollResultLabel.text = rollResultMessage[3];
+        [self rollDice];
+        [self showDice]; //do all our animating etc.
+    }
     
-}
-
--(IBAction)holdButtonPressed:(id)sender
-{
-    NSLog(@"hold button pressed");
-    rollAgain = false;
-    [self calculateTotalScore]; //calculate player's total score
-    [self playSound:holdSoundID];
-    [self animateRoundScore]; //animate the round score to the player's total
 }
 
 -(IBAction)exitButtonPressed:(id)sender
@@ -228,18 +223,12 @@
 {
     NSLog(@"updateScoreLabels started");
     [self showRollScore];
-    [self showRoundScore];
     [self showTotalScoreLabels];
 }
 
 -(void)showRollScore
 {
     rollScoreLabel.text = [NSString stringWithFormat:@"%d", rollScore];
-}
-
--(void)showRoundScore
-{
-    roundScoreLabel.text = [NSString stringWithFormat:@"%d", roundScore];
 }
 
 -(void)showTotalScoreLabels
@@ -297,7 +286,7 @@
     [self showRollScore];
     [self animateRollScore];
     [self playResultSound];
-    
+    isRolling=NO;
     self.view.userInteractionEnabled=YES;
     
 
@@ -314,9 +303,6 @@
                          rollScoreLabel.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(.221, 0.221), CGAffineTransformTranslate(rollScoreLabel.transform, 0, 80));
                      }
                      completion:^(BOOL finished){
-                         
-                         //update round score
-                         [self showRoundScore];
                          rollScoreLabel.text = @""; //set rollscore to blank
                          
                          //need to reset rollResult label position
@@ -328,76 +314,15 @@
                                                rollScoreLabel.hidden=YES;
                                            }
                                            completion:^(BOOL finished){
-                                               //nothing
-                                               if(!rollAgain)
-                                               {
-                                                   [self animateRoundScore];
-                                               }
+                                               [self showTotalScoreLabels];
+                                               [self evaluateRound];
                                            }];
                          
 
                      }];  
 }
 
--(void)animateRoundScore
-{
-    //more Round Score onto current player's total score, then change players
-    NSLog(@"animateRoundScore started, ones is %d",ones);
-    if (ones == 1) //animate the round score to the right
-    {
-        //animate ones away
-        [UILabel animateWithDuration:0.8
-                               delay: 0.1
-                             options: UIViewAnimationCurveEaseOut
-                          animations:^{
-                              roundScoreLabel.transform = CGAffineTransformMakeTranslation(150, 0);
-                          }
-                          completion:^(BOOL finished){
-                              [self setRoundScoreLabelText:@""]; //clear round score label text
-                                                            
-                              //reset position (i'm sure there's an easier way to do this)
-                              roundScoreLabel.hidden = YES;
-                              [UILabel animateWithDuration:0.0
-                                                     delay: 0.5
-                                                   options: UIViewAnimationCurveEaseOut
-                                                animations:^{
-                                                    roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
-                                                }
-                                                completion:^(BOOL finished){
-                                                    //update total scores
-                                                    [self showTotalScoreLabels];
-                                                    [self evaluateRound];
-                                                    roundScoreLabel.hidden = NO;
-                                                }];
-                          }];
-        
-    }
-    else {
-            
-    [UILabel animateWithDuration:0.5
-                           delay: 0.1
-                         options: UIViewAnimationCurveEaseOut
-                      animations:^{
-                          roundScoreLabel.transform = CGAffineTransformMakeTranslation(30, 60);
-                      }
-                      completion:^(BOOL finished){
-                          //need to reset roundScore label position
-                          [UILabel animateWithDuration:0.0
-                                                 delay: 0.1
-                                               options: UIViewAnimationCurveEaseOut
-                                            animations:^{
-                                                roundScoreLabel.transform = CGAffineTransformMakeTranslation(0, 0);
-                                            }
-                                            completion:^(BOOL finished){
-                                                //update total scores
-                                                [self showTotalScoreLabels];
-                                                [self evaluateRound];
-                                            }];
 
-                      }];
-    
-    }
-}
 
 
 -(void)animateWinningMessage:(int)winningPlayer
@@ -449,7 +374,7 @@
                           delay: 0.1
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         exitButton.transform = CGAffineTransformMakeTranslation(0, -100);
+                         exitButton.transform = CGAffineTransformMakeTranslation(0, -300);
                      }
                      completion:^(BOOL finished){
                          //enable exit buttons
@@ -543,6 +468,7 @@
 {
     rollResultLabel.text = [NSString stringWithFormat:@"%@ to roll", [self getPlayerName:currentPlayer]];
     [self swapPlayerNames:currentPlayer];
+    
 }
 
 
@@ -576,7 +502,7 @@
                          player1View.transform = CGAffineTransformMakeTranslation(xpos1, ypos1);
                      }
                      completion:^(BOOL finished){
-                         //do nothing
+                         isRolling = NO;
                      }];
     [UIView animateWithDuration:0.7
                            delay: 0.3
@@ -585,7 +511,7 @@
                           player2View.transform = CGAffineTransformMakeTranslation(xpos2, ypos2);
                       }
                       completion:^(BOOL finished){
-                          //do nothing
+                          isRolling = NO;
                       }]; 
 }
 
@@ -628,6 +554,7 @@
 
 - (void)getStartingPlayer
 {
+    isRolling = YES;
     NSLog(@"getStartingPlayer started");
     //check for both player names
     [self showChooseStarterView];
@@ -746,40 +673,30 @@
         switch (ones)
         {
             case 0:
-                roundScore = roundScore + rollScore;
+                if (currentPlayer == PLAYER1)
+                {
+                    player1Total+= rollScore;
+                }
+                else
+                {
+                    player2Total += rollScore;
+                }
                 break;
                 
             case 1:
                 roundScore = 0;
+                [self changePlayers];
                 break;
                 
             case 2:
                 roundScore = 0;
                 [self resetTotalScore:currentPlayer];
+                [self changePlayers];
                 break;
                 
             default:
                 NSLog(@"CS: An error occured");
         }
-}
-
-
-
-//calculate total
--(void)calculateTotalScore
-{     
-        NSLog(@"CS: currentPlayer is %d", currentPlayer);
-        //add add roundscore to current player's total
-        if (currentPlayer == PLAYER1)
-        {
-            player1Total = player1Total + roundScore;
-        }
-        if (currentPlayer == PLAYER2)
-        {
-            player2Total = player2Total + roundScore;
-        }
-        //reset roundscore
-        roundScore = 0;
 }
 
 
@@ -807,7 +724,6 @@
     if (winningPlayer == 0)
     {
         NSLog(@"No winner yet");
-        [self changePlayers];
     }
     
     else {

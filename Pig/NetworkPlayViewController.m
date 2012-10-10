@@ -10,6 +10,7 @@
 
 #import "NetworkPlayViewController.h"
 
+
 @interface NetworkPlayViewController ()
 
 @end
@@ -35,6 +36,7 @@ NSString *remotePlayerName = @"";
 @synthesize player2ScoreLabel;
 @synthesize player1NameLabel;
 @synthesize player2NameLabel;
+@synthesize messageLabel;
 
 //network
 @synthesize gamePeerID;
@@ -91,16 +93,6 @@ NSString *remotePlayerName = @"";
     {
         [self changePlayers];
     }
-}
-
--(IBAction)holdButtonPressed:(id)sender
-{
-    NSLog(@"hold button pressed");
-    [self buildData]; //send data
-    [self calculateScore:false]; //false: roll press isn't sending the message
-    [self showScoreLabels];
-    [self evaluateRound];
-    [self playSound:holdSoundID];
 }
 
 -(IBAction)exitButtonPressed:(id)sender
@@ -257,7 +249,6 @@ NSString *remotePlayerName = @"";
 - (void)resetGame
 {
     NSLog(@"resetGame started");
-    currentPlayer = 1;
     roundScore = 0;
     player1Total = 0; //start at 0
     player2Total = 0; //start at 0
@@ -434,50 +425,34 @@ NSString *remotePlayerName = @"";
     NSString *receivedString = [NSString stringWithUTF8String:[data bytes]];
     NSLog(@"Received string was: %@",receivedString);
     
-    //divide up string
-    [self analyseData:receivedString];
     
-}
-
--(void)analyseData:(NSString *)dataString
-{
+    char dataChar = [receivedString characterAtIndex:0];
     
-    for (int i=0;i<[dataString length];i++)
+    switch (dataChar) 
     {
-        char dataChar = [dataString characterAtIndex:i];
-        
-        switch (dataChar) 
+        case 'c': //cointoss, first thing done is determine starting player based off peer id
+            //Player 1 is local, player 2 is foriegn
+            switch (([gamePeerID intValue] > [peer intValue]) ? PLAYER_SERVER : PLAYER_CLIENT)
         {
-            case 0: //dataString
-                if (dataChar == 'h')
-                {
-                    NSLog(@"Hold button was pressed");
-                }
-                
-                if (dataChar == 'r')
-                {
-                    NSLog(@"Roll button was pressed");
-                }
-                
-                if (dataChar == 'n')
-                {
-                    NSLog(@"No button was pressed");
-                }
-                
+            case PLAYER_SERVER:
+                [self startPlayer:PLAYER1];
                 break;
-            
-            case 1: //die1 value
-                die1 = dataChar;
-                break;
-                
-            case 2: //die1 value
-                die2 = dataChar;
-                break;
-                
-            default:
+            case PLAYER_CLIENT:
+                [self startPlayer:PLAYER2];
                 break;
         }
+            break;
         
+        case 'r': //die1 value
+            die1 = dataChar;
+            break;
+            
+        case 'p': //die1 value
+            die2 = dataChar;
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -517,19 +492,19 @@ NSString *remotePlayerName = @"";
     gamePeerID = nil;
     [self startPicker];
     
-    [self getStartingPlayer];
     [self resetGame];
     [self loadGameElements];
     [self initialiseSounds];
+    [self getStartingPlayer];
 }
 
 - (void)getStartingPlayer
 {
     NSLog(@"getStartingPlayer started");
     //check for both player names
-    [self readNames];
-    [self chooseStartingPlayer];
     
+    [self readNames];
+    [self sendData:@"c"];
 }
 
 -(void)loadGameElements
@@ -551,11 +526,10 @@ NSString *remotePlayerName = @"";
     player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
 }
 
--(void)chooseStartingPlayer
+-(void)startPlayer:(int)player
 {
     NSLog(@"chooseStartingPlayer started");
-    //show a view to choose who is starting
-    //players can choose either player, or flip a coin to determine    
+        
 }
 
 

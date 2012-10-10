@@ -47,6 +47,7 @@
     int ones; //how many dice with face "1" were rolled (values 0, 1, 2)
     
     BOOL rollAgain; //controls if the player may roll again this turn
+    BOOL isRolling;
     
     
     //screen elements
@@ -56,14 +57,12 @@
     IBOutlet UILabel *startingPlayerNameLabel;
     
     IBOutlet UIButton *exitButton;
-    IBOutlet UIButton *holdButton;
     IBOutlet UIButton *rollButton;
     
     IBOutlet UIImageView *die1View;
     IBOutlet UIImageView *die2View;
     IBOutlet UILabel *rollResultLabel;
     IBOutlet UILabel *rollScoreLabel;
-    IBOutlet UILabel *roundScoreLabel;
     
     IBOutlet UIView *player1View;
     IBOutlet UIView *player2View;

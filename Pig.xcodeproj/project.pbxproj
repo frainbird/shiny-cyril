@@ -20,6 +20,9 @@
 		38ADE189161BC27F00BD369E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17E161BC27F00BD369E /* icon.png */; };
 		38ADE18A161BC27F00BD369E /* pig_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE17F161BC27F00BD369E /* pig_icon.png */; };
 		38ADE18B161BC27F00BD369E /* roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADE180161BC27F00BD369E /* roll.png */; };
+		38E4B09816250E15002AF06A /* button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4B09616250E15002AF06A /* button_normal.png */; };
+		38E4B09916250E15002AF06A /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4B09716250E15002AF06A /* button_pressed.png */; };
+		38E4B09C1625126E002AF06A /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4B09B1625126E002AF06A /* exit.png */; };
 		DD408B441622476600D89F8A /* NetworkPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD408B421622476600D89F8A /* NetworkPlayViewController.m */; };
 		DD408B451622476600D89F8A /* NetworkPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD408B431622476600D89F8A /* NetworkPlayViewController.xib */; };
 		DD45D694160C14860082FAB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD45D693160C14860082FAB0 /* UIKit.framework */; };
@@ -69,6 +72,9 @@
 		38ADE17E161BC27F00BD369E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = res/icon.png; sourceTree = "<group>"; };
 		38ADE17F161BC27F00BD369E /* pig_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pig_icon.png; sourceTree = "<group>"; };
 		38ADE180161BC27F00BD369E /* roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roll.png; sourceTree = "<group>"; };
+		38E4B09616250E15002AF06A /* button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_normal.png; sourceTree = "<group>"; };
+		38E4B09716250E15002AF06A /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
+		38E4B09B1625126E002AF06A /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
 		DD408B411622476600D89F8A /* NetworkPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkPlayViewController.h; sourceTree = "<group>"; };
 		DD408B421622476600D89F8A /* NetworkPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPlayViewController.m; sourceTree = "<group>"; };
 		DD408B431622476600D89F8A /* NetworkPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkPlayViewController.xib; sourceTree = "<group>"; };
@@ -274,6 +280,9 @@
 		DDA636B4161FCA1F00DB1A50 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				38E4B09B1625126E002AF06A /* exit.png */,
+				38E4B09616250E15002AF06A /* button_normal.png */,
+				38E4B09716250E15002AF06A /* button_pressed.png */,
 				DDBE372B1624209B008DFAF2 /* popup.png */,
 				38ADE176161BC27F00BD369E /* background.png */,
 				38ADE177161BC27F00BD369E /* dice1.png */,
@@ -381,6 +390,9 @@
 				38051CED1622D63C0019C826 /* OldstyItaHPLHS.otf in Resources */,
 				DD5919891623FEC600A900ED /* buttonClick.wav in Resources */,
 				DDBE372C1624209B008DFAF2 /* popup.png in Resources */,
+				38E4B09816250E15002AF06A /* button_normal.png in Resources */,
+				38E4B09916250E15002AF06A /* button_pressed.png in Resources */,
+				38E4B09C1625126E002AF06A /* exit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

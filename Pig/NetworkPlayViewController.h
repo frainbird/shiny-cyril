@@ -36,6 +36,13 @@ typedef struct {
     
     playerTypes currentPlayer;
     int roundScore;
+} gameStatus;
+
+typedef enum{
+    GAME_START,
+    GAME_LOCAL,
+    GAME_FOREIGN,
+    GAME_END
 } gameState;
 
 typedef struct {
@@ -43,12 +50,15 @@ typedef struct {
     int dice2;
 } roll;
 
+gameState currentState;
+
 @interface NetworkPlayViewController : UIViewController
 {
     //local variables
     
     //network variables
     NSString    *gamePeerID;
+    NSString    *otherPeerID;
     GKSession   *gameSession;
     
     //sound variables
@@ -80,16 +90,15 @@ typedef struct {
     BOOL rollAgain; //controls if the player may roll again this turn
     
     IBOutlet UIButton *exitButton;
-    IBOutlet UIButton *holdButton;
     IBOutlet UIButton *rollButton;
     IBOutlet UIImageView *die1View;
     IBOutlet UIImageView *die2View;
     IBOutlet UILabel *rollResultLabel;
-    IBOutlet UILabel *roundScoreLabel;
     IBOutlet UILabel *player1ScoreLabel;
     IBOutlet UILabel *player2ScoreLabel;
     IBOutlet UILabel *player1NameLabel;
     IBOutlet UILabel *player2NameLabel;
+    IBOutlet UILabel *messageLabel;
 }
 
 @property UIButton *exitButton;
@@ -103,15 +112,16 @@ typedef struct {
 @property UILabel *player2ScoreLabel;
 @property UILabel *player1NameLabel;
 @property UILabel *player2NameLabel;
+@property UILabel *messageLabel;
 
 @property(nonatomic,retain) GKSession   *gameSession;
 @property(nonatomic,copy)   NSString    *gamePeerID;
+@property(nonatomic,copy)   NSString    *otherPeerID;
 
 -(void)playGame;
 
--(IBAction)holdButtonPressed:(id)sender;
 -(IBAction)rollButtonPressed:(id)sender;
--(IBAction)exitButtonPressed:(id)sender;
+-(IBAction)continueButtonPressed:(id)sender;
 
 -(void)startPicker;
 -(void)invalidateSession:(GKSession *)session;
