@@ -336,6 +336,8 @@ NSString *remotePlayerName = @"";
     
     // we now have a session that is communicating with the other player
     
+    [self getStartingPlayer];
+    
 } 
 
 
@@ -495,7 +497,6 @@ NSString *remotePlayerName = @"";
     [self resetGame];
     [self loadGameElements];
     [self initialiseSounds];
-    [self getStartingPlayer];
 }
 
 - (void)getStartingPlayer
