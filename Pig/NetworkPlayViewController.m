@@ -204,8 +204,8 @@ NSString *remotePlayerName = @"";
     //    rollResultLabel.text = [NSString stringWithFormat:@"Player %d to roll", currentPlayer];
     // }
     roundScoreLabel.text = [NSString stringWithFormat:@"Round: %d", roundScore];
-    player1ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", player1Name, player1Total];
-    player2ScoreLabel.text = [NSString stringWithFormat:@"%@: %d", player2Name, player2Total];
+    player1ScoreLabel.text = [NSString stringWithFormat:@"%d", player1Total];
+    player2ScoreLabel.text = [NSString stringWithFormat:@"%d", player2Total];
 }
 
 -(void)showWinnerMessage:(int)winningPlayer
@@ -493,6 +493,7 @@ NSString *remotePlayerName = @"";
     NSLog(@"Play game started");
     gameSession = nil;
     gamePeerID = nil;
+    localPlayerName = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
     [self startPicker];
     
     [self resetGame];
@@ -531,6 +532,9 @@ NSString *remotePlayerName = @"";
 -(void)startPlayer:(int)player
 {
     NSLog(@"chooseStartingPlayer started");
+    [self readNames];
+    [self showPlayerNames];
+    [self showScoreLabels];
         
 }
 
