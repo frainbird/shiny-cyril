@@ -434,6 +434,7 @@ NSString *remotePlayerName = @"";
     {
         case 'c': //cointoss, first thing done is determine starting player based off peer id
             //Player 1 is local, player 2 is foriegn
+            otherPeerID = peer;
             switch (([gamePeerID intValue] > [peer intValue]) ? PLAYER_SERVER : PLAYER_CLIENT)
         {
             case PLAYER_SERVER:
@@ -524,7 +525,7 @@ NSString *remotePlayerName = @"";
     NSLog(@"readNames started");
     
     player1Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER1_KEY];
-    player2Name = [[NSUserDefaults standardUserDefaults] stringForKey:PLAYER2_KEY];
+    player2Name = [gameSession displayNameForPeer:otherPeerID];
 }
 
 -(void)startPlayer:(int)player

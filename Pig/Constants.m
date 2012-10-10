@@ -16,7 +16,7 @@ NSString *const rollResultMessage[4]={@"Score points!", @"A one! Score nothing",
 
 const int PLAYER1 = 1;
 const int PLAYER2 = 2;
-const int WINNING_SCORE = 50;
+const int WINNING_SCORE = 100;
 
 //used in namesViewController
 const int VALID = 0;

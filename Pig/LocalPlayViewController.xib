@@ -149,7 +149,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 360}, {72, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="306895744"/>
+						<reference key="NSNextKeyView" ref="183721642"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -327,18 +327,18 @@
 							<bytes key="NSRGB">MSAwLjUwMTk2MDc4NDMgMC41MDE5NjA3ODQzAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="433853557"/>
-						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="216410441">
+						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="934089947">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">exit.png</string>
 						</object>
-						<reference key="IBUINormalBackgroundImage" ref="216410441"/>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="603046619">
+						<reference key="IBUINormalBackgroundImage" ref="934089947"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="482066319">
 							<string key="name">Palatino-Bold</string>
 							<string key="family">Palatino</string>
 							<int key="traits">2</int>
 							<double key="pointSize">20</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="628048893">
+						<object class="NSFont" key="IBUIFont" id="592628789">
 							<string key="NSName">Palatino-Bold</string>
 							<double key="NSSize">20</double>
 							<int key="NSfFlags">16</int>
@@ -435,7 +435,7 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIButton" id="306895744">
+					<object class="IBUIButton" id="183721642">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{70, 614}, {178, 48}}</string>
@@ -461,8 +461,8 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">button_normal.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="603046619"/>
-						<reference key="IBUIFont" ref="628048893"/>
+						<reference key="IBUIFontDescription" ref="482066319"/>
+						<reference key="IBUIFont" ref="592628789"/>
 					</object>
 					<object class="IBUIView" id="477585145">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -484,7 +484,6 @@
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{7, 172}, {270, 58}}</string>
 								<reference key="NSSuperview" ref="477585145"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -703,7 +702,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">exitButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="306895744"/>
+						<reference key="destination" ref="183721642"/>
 					</object>
 					<int key="connectionID">89</int>
 				</object>
@@ -724,6 +723,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">13</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">exitButtonPressed:</string>
+						<reference key="source" ref="183721642"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">90</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -748,7 +756,7 @@
 							<reference ref="477585145"/>
 							<reference ref="720184928"/>
 							<reference ref="194377816"/>
-							<reference ref="306895744"/>
+							<reference ref="183721642"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -899,7 +907,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">88</int>
-						<reference key="object" ref="306895744"/>
+						<reference key="object" ref="183721642"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -939,7 +947,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">89</int>
+			<int key="maxID">90</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
